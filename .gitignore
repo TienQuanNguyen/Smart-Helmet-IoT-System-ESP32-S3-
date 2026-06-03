@@ -105,3 +105,6 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Clangd local cache
+.cache/
