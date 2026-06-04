@@ -6,6 +6,7 @@
 #define MPU6050_DEFAULT_I2C_PORT       0
 #define MPU6050_DEFAULT_I2C_CLOCK_HZ   400000U
 #define MPU6050_DEFAULT_ADDRESS        0x68U
+#define MPU6050_DEFAULT_MOCK_ENABLED   false
 
 typedef struct {
     int i2c_port;
@@ -13,6 +14,7 @@ typedef struct {
     int scl_pin;
     uint32_t clock_speed_hz;
     uint8_t device_address;
+    bool mock_enabled;
 } mpu6050_config_t;
 
 typedef struct {

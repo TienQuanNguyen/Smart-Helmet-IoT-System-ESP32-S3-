@@ -9,8 +9,8 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define MPU6050_DEFAULT_SDA_PIN 21
-#define MPU6050_DEFAULT_SCL_PIN 22
+#define MPU6050_DEFAULT_SDA_PIN 8
+#define MPU6050_DEFAULT_SCL_PIN 9
 
 #define MPU6050_I2C_TIMEOUT_MS 1000
 
@@ -19,6 +19,7 @@
 #define MPU6050_REG_GYRO_CONFIG 0x1B
 #define MPU6050_REG_ACCEL_CONFIG 0x1C
 #define MPU6050_REG_ACCEL_XOUT_H 0x3B
+#define MPU6050_REG_GYRO_XOUT_H 0x43
 #define MPU6050_REG_PWR_MGMT_1 0x6B
 #define MPU6050_REG_WHO_AM_I 0x75
 
@@ -38,11 +39,14 @@ static i2c_port_t s_i2c_port = (i2c_port_t)MPU6050_DEFAULT_I2C_PORT;
 static uint8_t s_device_address = MPU6050_DEFAULT_ADDRESS;
 static bool s_i2c_ready;
 static bool s_initialized;
+static bool s_mock_enabled;
+static int16_t s_mock_sample_index;
 
 static bool mpu6050_is_valid_config(const mpu6050_config_t *config) {
   return (config != NULL) && (config->i2c_port >= I2C_NUM_0) &&
-         (config->sda_pin >= 0) && (config->scl_pin >= 0) &&
-         (config->clock_speed_hz > 0) && (config->device_address > 0) &&
+         (config->i2c_port < I2C_NUM_MAX) && (config->sda_pin >= 0) &&
+         (config->scl_pin >= 0) && (config->clock_speed_hz > 0) &&
+         (config->device_address > 0) &&
          (config->device_address < 0x80);
 }
 
@@ -56,7 +60,7 @@ static bool mpu6050_check_err(esp_err_t err, const char *action) {
 }
 
 static int16_t mpu6050_make_i16(uint8_t high, uint8_t low) {
-  return (int16_t)((high << 8) | low);
+  return (int16_t)(((uint16_t)high << 8) | low);
 }
 
 static bool mpu6050_i2c_master_init(const mpu6050_config_t *config) {
@@ -133,6 +137,7 @@ bool mpu6050_init(void) {
       .scl_pin = MPU6050_DEFAULT_SCL_PIN,
       .clock_speed_hz = MPU6050_DEFAULT_I2C_CLOCK_HZ,
       .device_address = MPU6050_DEFAULT_ADDRESS,
+      .mock_enabled = MPU6050_DEFAULT_MOCK_ENABLED,
   };
 
   return mpu6050_init_with_config(&default_config);
@@ -146,6 +151,16 @@ bool mpu6050_init_with_config(const mpu6050_config_t *config) {
   if (!mpu6050_is_valid_config(config)) {
     ESP_LOGE(TAG, "Invalid MPU6050 config");
     return false;
+  }
+
+  s_i2c_port = (i2c_port_t)config->i2c_port;
+  s_device_address = config->device_address;
+  s_mock_enabled = config->mock_enabled;
+
+  if (s_mock_enabled) {
+    s_initialized = true;
+    ESP_LOGW(TAG, "MPU6050 mock mode enabled");
+    return true;
   }
 
   if (!s_i2c_ready && !mpu6050_i2c_master_init(config)) {
@@ -188,6 +203,11 @@ bool mpu6050_read_who_am_i(uint8_t *who_am_i) {
     return false;
   }
 
+  if (s_mock_enabled) {
+    *who_am_i = s_device_address;
+    return true;
+  }
+
   return mpu6050_read_registers(MPU6050_REG_WHO_AM_I, who_am_i, 1);
 }
 
@@ -200,6 +220,17 @@ bool mpu6050_read_raw(mpu6050_raw_t *raw) {
   if (!s_initialized) {
     ESP_LOGE(TAG, "MPU6050 is not initialized");
     return false;
+  }
+
+  if (s_mock_enabled) {
+    s_mock_sample_index++;
+    raw->ax = s_mock_sample_index % 256;
+    raw->ay = -(s_mock_sample_index % 128);
+    raw->az = (int16_t)(MPU6050_ACCEL_LSB_PER_G + (s_mock_sample_index % 64));
+    raw->gx = s_mock_sample_index % 32;
+    raw->gy = -(s_mock_sample_index % 16);
+    raw->gz = s_mock_sample_index % 8;
+    return true;
   }
 
   uint8_t data[MPU6050_RAW_FRAME_LEN] = {0};
