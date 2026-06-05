@@ -16,7 +16,8 @@ The system is designed to detect abnormal motion events, check alcohol level bef
 * **Firmware Design:** Modular and event-driven architecture.
 * **Sensor Integration:** MPU6050, MQ-3 alcohol sensor, and GPS module.
 * **Communication:** Wi-Fi as the main channel and BLE as a fallback/local channel.
-* **Safety Logic:** Accident detection, alcohol checking, GPS-based alert, and local buzzer/LED warning.
+* **Backend Software:** Node.js server for receiving device data, processing alerts, and sending location information to relatives.
+* **Safety Logic:** Accident detection, alcohol checking, GPS-based alert.
 * **Bike Node Simulation:** ESP32-C3 controls a relay/transistor circuit for simulated start-lock behavior.
 * **Power Management:** MQ-3 sensor is controlled by MOSFET to reduce power consumption.
 
@@ -31,13 +32,12 @@ Helmet Node (ESP32-S3)
 ├── MQ-3             → Alcohol level checking
 ├── GPS Module       → Location tracking
 ├── Wi-Fi / BLE      → Alert and data communication
-├── Buzzer / LED     → Local warning
 └── Battery System   → Portable power source
 
 Bike Node (ESP32-C3)
 │
 └── Relay / Transistor Circuit
-    └── Simulated START_ENABLE_SIGNAL
+    └── Simulated 
 ```
 
 ---
@@ -84,8 +84,11 @@ The system uses MPU6050 acceleration and gyroscope data to detect abnormal motio
 The MQ-3 sensor is activated only during the pre-start checking stage to reduce power consumption.
 If alcohol level exceeds the threshold, the system triggers a warning and sends a lock signal to the simulated bike node.
 
-### Simulated Start-Lock
+### GPS Alert Notification
 
+When an accident is detected, the ESP32-S3 collects GPS data and sends an emergency payload to the app.
+The backend processes the event and forwards the alert with location information to relatives.
+### Simulated Start-Lock
 
 This mechanism is implemented only on a controlled simulation circuit.
 
@@ -97,6 +100,7 @@ This mechanism is implemented only on a controlled simulation circuit.
 * Practice firmware development using C, ESP-IDF, and FreeRTOS.
 * Design modular firmware for easier testing and maintenance.
 * Integrate multiple peripherals using UART, I2C, ADC, Wi-Fi, and BLE.
+* Develop a Node.js backend for alert handling and GPS location forwarding.
 * Apply power management for high-consumption sensors.
 * Demonstrate hardware–firmware–software integration in a safety-oriented system.
 
@@ -111,6 +115,8 @@ This mechanism is implemented only on a controlled simulation circuit.
 * [ ] Sensor driver integration
 * [ ] Wi-Fi/BLE communication
 * [ ] Start-lock simulation circuit
+* [ ] Node.js backend implementation
+* [ ] GPS alert notification
 * [ ] Final testing and documentation
 
 ---
@@ -129,6 +135,7 @@ This mechanism is implemented only on a controlled simulation circuit.
 ## Author
 
 **Nguyen Tien Quan**
+**Le Huu Tho**
 Computer Engineering Student
 Industrial University of Ho Chi Minh City
 
