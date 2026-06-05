@@ -8,6 +8,7 @@
 #define IMU_SAMPLE_PERIOD_MS            20
 #define GPS_SAMPLE_PERIOD_MS            1000
 #define POWER_TASK_PERIOD_MS            1000
+
 #define PHASE2_DRIVER_LOG_PERIOD_MS     1000
 #define GPS_READ_TIMEOUT_MS             200
 #define GPS_RAW_LINE_BUFFER_SIZE        128

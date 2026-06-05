@@ -76,9 +76,8 @@ static bool mq3_adc_init(const mq3_config_t *config) {
   };
 
   return mq3_check_err(
-      adc_oneshot_config_channel(s_adc_handle,
-                                 (adc_channel_t)config->adc_channel,
-                                 &channel_config),
+      adc_oneshot_config_channel(
+          s_adc_handle, (adc_channel_t)config->adc_channel, &channel_config),
       "adc_oneshot_config_channel");
 }
 
@@ -176,9 +175,9 @@ bool mq3_read_raw(uint16_t *adc_raw) {
   }
 
   int raw = 0;
-  if (!mq3_check_err(adc_oneshot_read(s_adc_handle,
-                                      (adc_channel_t)s_adc_channel, &raw),
-                     "adc_oneshot_read")) {
+  if (!mq3_check_err(
+          adc_oneshot_read(s_adc_handle, (adc_channel_t)s_adc_channel, &raw),
+          "adc_oneshot_read")) {
     return false;
   }
 
@@ -197,7 +196,8 @@ bool mq3_read_voltage(float *voltage) {
     return false;
   }
 
-  *voltage = ((float)adc_raw / MQ3_ADC_MAX_RAW_VALUE) * MQ3_ADC_REFERENCE_VOLTAGE;
+  *voltage =
+      ((float)adc_raw / MQ3_ADC_MAX_RAW_VALUE) * MQ3_ADC_REFERENCE_VOLTAGE;
   return true;
 }
 
