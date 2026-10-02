@@ -12,6 +12,29 @@ Muc tieu hien tai:
 - Khong tich hop Wi-Fi/BLE trong cac phase hien tai.
 - Firmware di theo huong module hoa bang ESP-IDF components.
 
+## 0. Cap nhat bang chung CHANGE-001, CHANGE-002 va CHANGE-013 - 2026-10-02
+
+Bao cao nay dung cac nhan ket qua rieng biet sau:
+
+- `BUILD VERIFIED`: source compile va link thanh cong cho target `esp32s3`; khong dong nghia da chay tren board.
+- `MOCK VERIFIED`: luong mock da duoc chay va dat tieu chi; khong dong nghia sensor that dat.
+- `HARDWARE PASS`: da flash/chay voi dung day noi, quan sat log va dat tat ca tieu chi PASS trong `docs/test_plan.md`.
+- `FAILED`: bai kiem tra da chay va co it nhat mot tieu chi khong dat.
+- `BLOCKED`: chua the chay/ket luan vi thieu board, module, cong serial xac dinh, dieu kien moi truong hoac dieu kien tien quyet.
+
+Khong duoc suy ra `HARDWARE PASS` tu `BUILD VERIFIED` hoac `MOCK VERIFIED`.
+
+| Phase | Source | Build 2026-10-02 | Mock | Hardware | Ghi chu bang chung |
+|---|---|---|---|---|---|
+| 1 | IMPLEMENTED | BUILD VERIFIED | BLOCKED | BLOCKED | Chua flash/chay board trong lan cap nhat nay. |
+| 2 | IMPLEMENTED | BUILD VERIFIED | BLOCKED | FAILED (lan ghi nhan gan nhat) | CHANGE-002 da dong bo +/-4 g va 8192 LSB/g; lan test board gan nhat van khong co ACK tai `0x68`/`0x69`. |
+| 3 | IMPLEMENTED | BUILD VERIFIED | BLOCKED | BLOCKED | Preflight moi se danh dau FAILED neu parser chap nhan checksum sai; chua chay runtime. |
+| 4 | IMPLEMENTED | BUILD VERIFIED | BLOCKED | BLOCKED | CHANGE-001 da sua GPIO4 -> ADC1 channel 3 va calibrated conversion; chua chay runtime. |
+| 5 | IMPLEMENTED | BUILD VERIFIED | BLOCKED | BLOCKED | Cau hinh real MPU6050 da dong bo +/-4 g; real sensor van phu thuoc Phase 2. |
+| 6 | IMPLEMENTED | BUILD VERIFIED | N/A | BLOCKED | Timeout queue that da duoc them vao test; chua flash/chay tren board. |
+
+Chi tiet PASS/FAIL cua tung phase nam trong `docs/test_plan.md`. Cac trang thai tren khong thay the ket qua thuc nghiem co timestamp, wiring va log day du.
+
 ## 1. Quy tac ky thuat da ap dung
 
 Da giu cac gioi han sau trong code:
@@ -39,7 +62,7 @@ API ESP-IDF dang duoc dung:
 
 ## 2. Phase 1 - Project bring-up
 
-Trang thai: PASS.
+Trang thai source: IMPLEMENTED. Build: BUILD VERIFIED. Mock: BLOCKED. Hardware: BLOCKED.
 
 Da kiem tra va cap nhat:
 
@@ -65,12 +88,12 @@ File lien quan:
 ```c
 #define PIN_I2C_SDA              8
 #define PIN_I2C_SCL              9
-#define PIN_GPS_RX               16
-#define PIN_GPS_TX               17
+#define PIN_GPS_RX               17
+#define PIN_GPS_TX               18
 #define PIN_MQ3_ADC              4
 #define PIN_MQ3_POWER_EN         5
 #define PIN_MPU6050_INT          7
-#define PIN_BUZZER               18
+#define PIN_BUZZER               10
 #define PIN_LED_STATUS           2
 #define PIN_SOS_BUTTON           6
 ```
@@ -103,7 +126,7 @@ Ghi chu:
 
 ## 3. Phase 2 - MPU6050 driver
 
-Trang thai: PASS.
+Trang thai source: IMPLEMENTED. Build: BUILD VERIFIED. Mock: BLOCKED. Hardware: FAILED o lan test gan nhat do khong co I2C ACK; chua test lai trong lan cap nhat nay.
 
 Component:
 
@@ -123,6 +146,9 @@ Da hoan thien:
 - Dung ESP-IDF I2C master API.
 - Co mock mode.
 - Co API doc/ghi du lieu raw va convert sang don vi vat ly.
+- CHANGE-002 dat default accel +/-4 g va scale 8192 LSB/g de do duoc nguong impact 3.0 g.
+- Config cho phep chon accel range, gyro range, DLPF va sample-rate divider.
+- Cac thanh ghi `SMPLRT_DIV`, `CONFIG`, `GYRO_CONFIG`, `ACCEL_CONFIG` duoc doc lai va so sanh sau khi ghi.
 
 API hien co:
 
@@ -146,11 +172,12 @@ Ghi chu:
 
 - Expected `WHO_AM_I = 0x68` neu chan AD0 cua MPU6050 noi GND.
 - Default I2C pin trong driver da dong bo voi ESP32-S3: SDA `8`, SCL `9`.
+- GPIO, dia chi, `WHO_AM_I` va legacy I2C API khong thay doi trong CHANGE-002.
 - Mock mode tra gia tri accel/gyro hop ly de test task va accident detector.
 
 ## 4. Phase 3 - GPS driver
 
-Trang thai: PASS.
+Trang thai source: IMPLEMENTED. Build: BUILD VERIFIED. Mock: BLOCKED. Hardware: BLOCKED. Parser checksum chua duoc sua trong CHANGE-013; preflight se bao FAILED neu chuoi co checksum sai van duoc chap nhan.
 
 Component:
 
@@ -167,8 +194,8 @@ Da hoan thien:
 - GPS module muc tieu: NEO-6M.
 - UART GPS tu cau hinh bang ESP-IDF.
 - Baudrate mac dinh: `9600`.
-- GPS TXD noi ESP32-S3 UART RX GPIO16.
-- GPS RXD noi ESP32-S3 UART TX GPIO17.
+- GPS TXD noi ESP32-S3 UART RX GPIO17.
+- GPS RXD noi ESP32-S3 UART TX GPIO18.
 - Co test doc raw NMEA.
 - Khong dung TinyGPS++.
 - Khong dung Arduino Serial.
@@ -210,14 +237,14 @@ Mock GPS:
 Can validate that bang phan cung:
 
 - NEO-6M.
-- NEO-6M TXD -> ESP32-S3 GPIO16.
-- NEO-6M RXD -> ESP32-S3 GPIO17.
+- NEO-6M TXD -> ESP32-S3 GPIO17.
+- NEO-6M RXD -> ESP32-S3 GPIO18.
 - GND chung.
 - Nguon cap phu hop module GPS.
 
 ## 5. Phase 4 - MQ-3 driver
 
-Trang thai: PASS.
+Trang thai source: IMPLEMENTED. Build: BUILD VERIFIED. Mock: BLOCKED. Hardware: BLOCKED. CHANGE-001 da sua mapping va conversion; chua flash/chay de xac nhan phan cung.
 
 Component:
 
@@ -235,7 +262,8 @@ Da hoan thien:
 - Khong dung `analogRead`.
 - Dieu khien MOSFET cap/ngat nguon MQ-3 bang GPIO `PIN_MQ3_POWER_EN`.
 - Doc ADC raw.
-- Tinh voltage tu raw ADC.
+- Xac thuc GPIO4 map dung ADC1 channel 3 khi khoi tao.
+- Dung ESP-IDF curve-fitting calibration de doi raw sang dien ap tai node GPIO4.
 - Lay mau nhieu lan va loc trung binh.
 - So sanh nguong voltage.
 - Co mock mode theo `USE_MOCK_SENSOR_DATA`.
@@ -248,6 +276,7 @@ bool mq3_init_with_config(const mq3_config_t *config);
 void mq3_power_on(void);
 void mq3_power_off(void);
 bool mq3_read_raw(uint16_t *adc_raw);
+bool mq3_convert_raw_to_voltage(uint16_t adc_raw, float *adc_node_voltage);
 bool mq3_read_voltage(float *voltage);
 bool mq3_sample_average(float *avg_voltage, uint16_t sample_count);
 bool mq3_is_alcohol_detected(float voltage);
@@ -269,6 +298,9 @@ Ghi chu:
 - Warm-up se duoc quan ly bang state machine o layer cao hon.
 - Real mode chi cho doc khi sensor da duoc `mq3_power_on()`.
 - Mock mode co the tra raw/voltage sau init de phuc vu test.
+- Dien ap log/threshold la dien ap tai GPIO4 sau mach chia ap, khong phai dien ap AO goc.
+- Nguong 1.80 V duoc giu nguyen va chua phai nguong nong do con da hieu chuan thuc nghiem.
+- Neu ADC calibration khong co san, init tra ve FAILED thay vi dung tham chieu 3.3 V gia dinh.
 
 Can validate that bang phan cung:
 
@@ -279,7 +311,7 @@ Can validate that bang phan cung:
 
 ## 6. Phase 5 - Accident detector
 
-Trang thai: PASS.
+Trang thai source: IMPLEMENTED. Build: BUILD VERIFIED. Mock: BLOCKED. Hardware: BLOCKED. Phase 5 dung cau hinh MPU6050 +/-4 g cua CHANGE-002; preflight deterministic da compile nhung chua chay tren target.
 
 Component moi:
 
@@ -338,7 +370,7 @@ Mock test:
 
 ## 7. Phase 6 - Event manager va System state
 
-Trang thai: PASS.
+Trang thai source: IMPLEMENTED. Build: BUILD VERIFIED. Mock: N/A. Hardware: BLOCKED. Test da dung timeout queue that nhung chua duoc chay tren target.
 
 ### 7.1. Event manager
 
@@ -521,18 +553,21 @@ Neu VS Code van bao do:
 
 ## 10. Build/test
 
-Lenh da chay thanh cong:
+Lenh da chay thanh cong ngay 2026-10-02:
 
 ```powershell
-& 'D:\esp\v5.5.4\esp-idf\export.ps1'; idf.py build
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& 'C:\Espressif\tools\Microsoft.v5.5.4.PowerShell_profile.ps1'; idf.py build"
 ```
 
 Ket qua:
 
+- Trang thai: `BUILD VERIFIED` (khong phai `HARDWARE PASS`).
 - `Project build complete`.
 - Sinh `build/smart_helmet_iot.bin`.
-- App partition con trong khoang 77%.
+- Binary app: `0x45e10` bytes; app partition nho nhat con `0xba1f0` bytes (73%).
 - Target trong `sdkconfig`: `esp32s3`.
+- Tat ca source trong `hardware_tests` da compile/link trong build nay.
+- Khong flash/monitor vi chi thay COM ao/Bluetooth (`COM1` den `COM10`), khong co cong USB serial ESP32-S3 duoc xac dinh an toan. Runtime test vi vay la `BLOCKED`.
 
 Lenh test khi co board:
 

@@ -5,6 +5,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "gps_driver.h"
+#include "hardware_test.h"
 #include "mpu6050_driver.h"
 #include "mq3_driver.h"
 #include "pin_config.h"
@@ -22,6 +23,10 @@ static bool init_mpu6050_driver(void) {
       .scl_pin = PIN_I2C_SCL,
       .clock_speed_hz = MPU6050_DEFAULT_I2C_CLOCK_HZ,
       .device_address = MPU6050_DEFAULT_ADDRESS,
+      .accel_range = MPU6050_DEFAULT_ACCEL_RANGE,
+      .gyro_range = MPU6050_DEFAULT_GYRO_RANGE,
+      .dlpf = MPU6050_DEFAULT_DLPF,
+      .sample_rate_divider = MPU6050_DEFAULT_SAMPLE_DIVIDER,
       .mock_enabled = USE_MOCK_SENSOR_DATA != 0,
   };
 
@@ -96,9 +101,14 @@ static void task_system_manager(void *arg) {
     app_test_publish_mock_events_if_needed(elapsed_ms);
 
     system_event_t event = SYSTEM_EVENT_NONE;
-    if (event_manager_wait(&event, SYSTEM_EVENT_WAIT_TIMEOUT_MS)) {
+    bool event_received =
+        event_manager_wait(&event, SYSTEM_EVENT_WAIT_TIMEOUT_MS);
+    if (event_received) {
       ESP_LOGI(TAG, "System event: %s", system_event_to_string(event));
-      system_state_handle_event(event);
+    }
+
+    system_state_handle_event(event);
+    if (event_received) {
       ESP_LOGI(TAG, "System state: %s",
                system_state_to_string(system_state_get()));
     }
@@ -110,10 +120,34 @@ static void task_system_manager(void *arg) {
 void app_main(void) {
   ESP_LOGI(TAG, "Booting %s", SYSTEM_NAME);
   ESP_LOGI(TAG, "Target board: ESP32-S3 DevKit");
+
+  if (HARDWARE_TEST_MODE != 0) {
+    const hardware_test_config_t test_config = {
+        .phase = HARDWARE_TEST_PHASE,
+        .i2c_sda_pin = PIN_I2C_SDA,
+        .i2c_scl_pin = PIN_I2C_SCL,
+        .mpu_int_pin = PIN_MPU6050_INT,
+        .gps_rx_pin = PIN_GPS_RX,
+        .gps_tx_pin = PIN_GPS_TX,
+        .mq3_adc_pin = PIN_MQ3_ADC,
+        .mq3_power_en_pin = PIN_MQ3_POWER_EN,
+        .mq3_warmup_time_ms = MQ3_WARMUP_TIME_MS,
+        .mq3_sample_count = MQ3_SAMPLE_COUNT,
+        .mq3_alcohol_threshold_voltage = MQ3_ALCOHOL_THRESHOLD_VOLTAGE,
+    };
+
+    if (!hardware_test_start(&test_config)) {
+      ESP_LOGE(TAG, "Hardware test phase %d failed to start",
+               HARDWARE_TEST_PHASE);
+    }
+    return;
+  }
+
   ESP_LOGI(TAG, "Sensor mock mode: %d", USE_MOCK_SENSOR_DATA);
   ESP_LOGI(TAG, "MPU6050 I2C pins: SDA=%d, SCL=%d", PIN_I2C_SDA, PIN_I2C_SCL);
   ESP_LOGI(TAG, "GPS UART pins: RX=%d, TX=%d", PIN_GPS_RX, PIN_GPS_TX);
-  ESP_LOGI(TAG, "MQ-3 ADC channel=%d, power pin=%d", MQ3_DEFAULT_ADC_CHANNEL,
+  ESP_LOGI(TAG, "MQ-3 ADC GPIO=%d ADC%d channel=%d, power pin=%d",
+           PIN_MQ3_ADC, MQ3_DEFAULT_ADC_UNIT + 1, MQ3_DEFAULT_ADC_CHANNEL,
            PIN_MQ3_POWER_EN);
 
   if (!event_manager_init() || !system_state_init() ||

@@ -33,10 +33,6 @@ void system_state_set(system_state_t new_state) {
 }
 
 void system_state_handle_event(system_event_t event) {
-  if (event == SYSTEM_EVENT_NONE) {
-    return;
-  }
-
   if (event == SYSTEM_EVENT_SOS_PRESSED) {
     system_state_set(SYSTEM_STATE_EMERGENCY_REPORTING);
     return;
