@@ -7,7 +7,7 @@
 
 /* Set to 1 to run one isolated hardware test instead of the application. */
 #define HARDWARE_TEST_MODE 1
-#define HARDWARE_TEST_PHASE 4
+#define HARDWARE_TEST_PHASE 3
 
 #define IMU_SAMPLE_PERIOD_MS 20
 #define GPS_SAMPLE_PERIOD_MS 1000

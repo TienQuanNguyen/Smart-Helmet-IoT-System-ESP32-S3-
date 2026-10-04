@@ -129,7 +129,7 @@ The checked-in configuration selects one isolated hardware test:
 
 ```c
 #define HARDWARE_TEST_MODE 1
-#define HARDWARE_TEST_PHASE 4
+#define HARDWARE_TEST_PHASE 3
 ```
 
 With hardware-test mode enabled, `app_main()` starts the selected test and
