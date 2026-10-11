@@ -21,8 +21,8 @@ not directly power the MQ-3 heater.
 |---|---|---|
 | MQ-3 power-enable and calibrated ADC API | IMPLEMENTED | GPIO control, GPIO4 mapping validation and ADC curve-fitting conversion exist in the driver |
 | MQ-3 application power schedule | BLOCKED | Normal startup alcohol flow is absent |
-| Wi-Fi on-demand policy | BLOCKED | Wi-Fi manager is absent |
-| BLE power policy | BLOCKED | BLE implementation is absent |
+| Wi-Fi on-demand policy | SOURCE PRESENT / RUNTIME BLOCKED | `wifi_manager` exists for the phone-hotspot gateway, but credentials and board logs are absent |
+| BLE power policy | CONTRACT PRESENT / RUNTIME BLOCKED | `ble_comm` Helmet/Bike GATT contract exists, but NimBLE runtime and Bike Node are absent |
 | GPS scheduling policy | BLOCKED | No normal periodic GPS task exists |
 | ESP-IDF dynamic power management | BLOCKED | `CONFIG_PM_ENABLE` is disabled |
 | Light-sleep validation | BLOCKED | No approved sleep-state/wakeup test exists |

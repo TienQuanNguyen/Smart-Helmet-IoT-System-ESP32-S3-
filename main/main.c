@@ -1,5 +1,7 @@
 #include "accident_detector.h"
 #include "app_test.h"
+#include "ble_comm.h"
+#include "cloud_client.h"
 #include "esp_log.h"
 #include "event_manager.h"
 #include "freertos/FreeRTOS.h"
@@ -11,6 +13,7 @@
 #include "pin_config.h"
 #include "system_config.h"
 #include "system_state.h"
+#include "wifi_manager.h"
 
 #define SYSTEM_EVENT_WAIT_TIMEOUT_MS 200
 
@@ -107,10 +110,30 @@ static void task_system_manager(void *arg) {
       ESP_LOGI(TAG, "System event: %s", system_event_to_string(event));
     }
 
+    system_state_t previous_state = system_state_get();
     system_state_handle_event(event);
+    system_state_t current_state = system_state_get();
+    if (current_state != previous_state) {
+      ble_comm_notify_state(current_state, elapsed_ms);
+    }
+
+    if ((current_state == SYSTEM_STATE_EMERGENCY_REPORTING) &&
+        (previous_state != SYSTEM_STATE_EMERGENCY_REPORTING)) {
+      const char *source_event = event_received ? system_event_to_string(event)
+                                                : "STATE_TIMEOUT";
+      const cloud_client_emergency_report_t report = {
+          .source_event = source_event,
+          .uptime_ms = elapsed_ms,
+          .state = current_state,
+      };
+
+      ble_comm_send_emergency(source_event, elapsed_ms);
+      cloud_client_submit_emergency(&report);
+    }
+
     if (event_received) {
       ESP_LOGI(TAG, "System state: %s",
-               system_state_to_string(system_state_get()));
+               system_state_to_string(current_state));
     }
 
     elapsed_ms += SYSTEM_EVENT_WAIT_TIMEOUT_MS;
@@ -150,11 +173,17 @@ void app_main(void) {
            PIN_MQ3_ADC, MQ3_DEFAULT_ADC_UNIT + 1, MQ3_DEFAULT_ADC_CHANNEL,
            PIN_MQ3_POWER_EN);
 
-  if (!event_manager_init() || !system_state_init() ||
-      !accident_detector_init() || !gps_init() || !mq3_init() ||
-      !init_mpu6050_driver()) {
+  if (!event_manager_init() || !system_state_init() || !wifi_manager_init(NULL) ||
+      !ble_comm_init() || !cloud_client_init() || !accident_detector_init() ||
+      !gps_init() || !mq3_init() || !init_mpu6050_driver()) {
     ESP_LOGE(TAG, "System init failed");
     return;
+  }
+
+  if (!wifi_manager_start()) {
+    ESP_LOGW(TAG,
+             "Wi-Fi manager did not start; cloud reports are unavailable until "
+             "phone hotspot config is valid");
   }
 
   app_test_run_startup_checks();

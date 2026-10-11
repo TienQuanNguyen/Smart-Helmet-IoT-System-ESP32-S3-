@@ -411,6 +411,7 @@ Event list:
 - `SYSTEM_EVENT_WIFI_CONNECTED`
 - `SYSTEM_EVENT_WIFI_LOST`
 - `SYSTEM_EVENT_BLE_CONNECTED`
+- `SYSTEM_EVENT_BLE_LOST`
 - `SYSTEM_EVENT_SOS_PRESSED`
 - `SYSTEM_EVENT_BATTERY_LOW`
 
@@ -615,8 +616,8 @@ File da sua:
 
 ## 12. Luu y quan trong cho cac phase tiep theo
 
-- Chua lam Phase 7.
-- Khong tich hop Wi-Fi/BLE truoc khi user yeu cau.
+- Phase 7 communication da co report rieng tai `docs/phase_7_communication_report.md`.
+- Wi-Fi/BLE khong thuoc pham vi Phase 1-6; xem Phase 7 de biet trang thai source/build/runtime.
 - MQ-3 warm-up 60 giay khong nen block trong driver; nen dua vao state machine.
 - Can do thuc nghiem de chot nguong MQ-3.
 - Can test GPS that ngoai troi hoac gan cua so de co fix.

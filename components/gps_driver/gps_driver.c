@@ -14,12 +14,13 @@
 #define GPS_DEFAULT_RX_PIN 16
 #define GPS_DEFAULT_TX_PIN 17
 #define GPS_UART_TIMEOUT_STEP_MS 20
+#define GPS_READ_DATA_MAX_LINES 5
 #define GPS_MAX_NMEA_FIELDS 20
 
 static const char *TAG = "gps_driver";
 
 static const char *GPS_MOCK_GGA_LINE =
-    "$GPGGA,021530.00,1049.3860,N,10637.7820,E,1,08,1.2,12.3,M,0.0,M,,*48";
+    "$GPGGA,021530.00,1049.3860,N,10637.7820,E,1,08,1.2,12.3,M,0.0,M,,*6D";
 
 static int s_uart_port = GPS_DEFAULT_UART_PORT;
 static bool s_initialized;
@@ -74,6 +75,57 @@ static bool gps_uart_init(const gps_config_t *config) {
   if (err == ESP_ERR_INVALID_STATE) {
     ESP_LOGW(TAG, "UART driver already installed on port %d",
              config->uart_port);
+  }
+
+  return true;
+}
+
+static int gps_hex_value(char value) {
+  if ((value >= '0') && (value <= '9')) {
+    return value - '0';
+  }
+  if ((value >= 'A') && (value <= 'F')) {
+    return value - 'A' + 10;
+  }
+  if ((value >= 'a') && (value <= 'f')) {
+    return value - 'a' + 10;
+  }
+  return -1;
+}
+
+static bool gps_is_line_terminator(char value) {
+  return (value == '\0') || (value == '\r') || (value == '\n');
+}
+
+static bool gps_validate_nmea_checksum(const char *line) {
+  const char *checksum = strchr(line, '*');
+  if (checksum == NULL) {
+    return true;
+  }
+
+  if ((checksum[1] == '\0') || (checksum[2] == '\0')) {
+    ESP_LOGW(TAG, "Malformed NMEA checksum");
+    return false;
+  }
+
+  const int high_nibble = gps_hex_value(checksum[1]);
+  const int low_nibble = gps_hex_value(checksum[2]);
+  if ((high_nibble < 0) || (low_nibble < 0) ||
+      !gps_is_line_terminator(checksum[3])) {
+    ESP_LOGW(TAG, "Malformed NMEA checksum");
+    return false;
+  }
+
+  uint8_t calculated = 0;
+  for (const char *cursor = line + 1; cursor < checksum; ++cursor) {
+    calculated ^= (uint8_t)(*cursor);
+  }
+
+  const uint8_t expected = (uint8_t)((high_nibble << 4) | low_nibble);
+  if (calculated != expected) {
+    ESP_LOGW(TAG, "Invalid NMEA checksum: expected=0x%02X actual=0x%02X",
+             expected, calculated);
+    return false;
   }
 
   return true;
@@ -235,6 +287,10 @@ bool gps_parse_nmea(const char *line, gps_data_t *out) {
     return false;
   }
 
+  if (!gps_validate_nmea_checksum(line)) {
+    return false;
+  }
+
   char line_copy[128] = {0};
   int len = snprintf(line_copy, sizeof(line_copy), "%s", line);
   if ((len < 0) || ((size_t)len >= sizeof(line_copy))) {
@@ -245,6 +301,10 @@ bool gps_parse_nmea(const char *line, gps_data_t *out) {
   char *checksum = strchr(line_copy, '*');
   if (checksum != NULL) {
     *checksum = '\0';
+  }
+  char *line_end = strpbrk(line_copy, "\r\n");
+  if (line_end != NULL) {
+    *line_end = '\0';
   }
 
   memset(out, 0, sizeof(*out));
@@ -267,10 +327,16 @@ bool gps_read_data(gps_data_t *out) {
   }
 
   char line[128] = {0};
-  int len = gps_read_raw_line(line, sizeof(line), GPS_READ_TIMEOUT_MS);
-  if (len <= 0) {
-    return false;
+  for (uint8_t attempt = 0; attempt < GPS_READ_DATA_MAX_LINES; ++attempt) {
+    int len = gps_read_raw_line(line, sizeof(line), GPS_READ_TIMEOUT_MS);
+    if (len <= 0) {
+      return false;
+    }
+
+    if (gps_parse_nmea(line, out)) {
+      return true;
+    }
   }
 
-  return gps_parse_nmea(line, out);
+  return false;
 }

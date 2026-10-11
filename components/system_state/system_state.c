@@ -116,6 +116,8 @@ const char *system_event_to_string(system_event_t event) {
       return "WIFI_LOST";
     case SYSTEM_EVENT_BLE_CONNECTED:
       return "BLE_CONNECTED";
+    case SYSTEM_EVENT_BLE_LOST:
+      return "BLE_LOST";
     case SYSTEM_EVENT_SOS_PRESSED:
       return "SOS_PRESSED";
     case SYSTEM_EVENT_BATTERY_LOW:
