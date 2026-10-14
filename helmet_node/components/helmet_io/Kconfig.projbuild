@@ -1,0 +1,18 @@
+menu "Helmet IO - confirm hardware before enabling"
+config HELMET_SOS_ACTIVE_LEVEL
+    int "SOS pressed level (-1 unknown)"
+    range -1 1
+    default 0
+config HELMET_LED_ACTIVE_LEVEL
+    int "LED active level (-1 unknown)"
+    range -1 1
+    default 1
+config HELMET_BUZZER_ACTIVE_LEVEL
+    int "Buzzer active level (-1 unknown)"
+    range -1 1
+    default 1
+config HELMET_BUZZER_HZ
+    int "Buzzer: -1 unknown, 0 active, passive frequency Hz"
+    range -1 10000
+    default 0
+endmenu
