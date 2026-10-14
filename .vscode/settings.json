@@ -13,6 +13,7 @@
   "clangd.arguments": [
     "--background-index",
     "--query-driver=**",
-    "--compile-commands-dir=d:\\KLTN_ESP32\\smart_helmet_iot\\build"
-  ]
+    "--compile-commands-dir=d:\\KLTN_ESP32\\smart_helmet_iot\\helmet_node\\build"
+  ],
+  "cmake.sourceDirectory": "D:/KLTN_ESP32/smart_helmet_iot/helmet_node"
 }
