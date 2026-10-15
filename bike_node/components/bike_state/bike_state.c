@@ -3,6 +3,15 @@
 #include <string.h>
 
 #include "esp_log.h"
+#include "rfid_uid_match.h"
+#include "sdkconfig.h"
+
+#ifndef CONFIG_BIKE_RFID_UID_1
+#define CONFIG_BIKE_RFID_UID_1 ""
+#endif
+#ifndef CONFIG_BIKE_RFID_UID_2
+#define CONFIG_BIKE_RFID_UID_2 ""
+#endif
 
 static const char *TAG = "bike_state";
 
@@ -51,23 +60,31 @@ void bike_state_update_helmet(bool connected, bool helmet_ready,
   s_ctx.helmet_connected = connected;
   s_ctx.helmet_ready = helmet_ready;
   s_ctx.alcohol_pass = alcohol_pass;
+  if (!connected || !helmet_ready || !alcohol_pass)
+    s_ctx.rfid_authorized = false;
   bike_state_refresh_status();
 }
 
 bool bike_state_is_hardcoded_uid_allowed(const uint8_t *uid, size_t uid_len) {
-  (void)uid;
-  (void)uid_len;
-
-  /*
-   * The user selected hardcoded UID authorization, but no real UID has been
-   * provided yet. Keep fail-closed until the allowlist is filled in BIKE-004.
-   */
-  return false;
+  return rfid_uid_matches(uid, uid_len, CONFIG_BIKE_RFID_UID_1) ||
+         rfid_uid_matches(uid, uid_len, CONFIG_BIKE_RFID_UID_2);
 }
 
 bool bike_state_is_ignition_allowed(void) {
   return s_ctx.rfid_authorized && s_ctx.helmet_connected &&
          s_ctx.helmet_ready && s_ctx.alcohol_pass;
+}
+
+bool bike_state_request_card(const uint8_t *uid, size_t uid_len) {
+  if (!bike_state_is_hardcoded_uid_allowed(uid, uid_len)) return false;
+  if (s_ctx.rfid_authorized) {
+    bike_state_set_rfid_authorized(false);
+    return true;
+  }
+  if (!s_ctx.helmet_connected || !s_ctx.helmet_ready || !s_ctx.alcohol_pass)
+    return false;
+  bike_state_set_rfid_authorized(true);
+  return true;
 }
 
 bike_state_status_t bike_state_get_status(void) {

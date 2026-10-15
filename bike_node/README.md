@@ -11,8 +11,17 @@ permission after 3 seconds. The application owns `bike_state` and the relay;
 BLE callbacks only update a protected snapshot. Relay updates run every 20 ms
 and only write GPIO when the requested state changes.
 
-RC522 reading, the real UID allowlist and OLED rendering are still incomplete.
-Authorization therefore stays fail-closed; no fake UID has been added.
+RC522 SPI reading supports 4/7/10-byte UIDs using a pinned upstream driver.
+The UID allowlist is configured in `menuconfig > Bike RFID authorization`.
+It is empty by default: all cards are denied until real UIDs are configured.
+UID scan-only mode always locks the relay. In normal mode, each allowed-card
+scan requests LOCK or UNLOCK. Remove the card for at least 400 ms to scan again.
+Unlock requires fresh, authorized Helmet status. A failed Helmet condition
+revokes permission; reconnecting alone cannot unlock the relay again.
+OLED rendering is still incomplete. No fake UID has been added to firmware.
+
+See [RFID and BLE integration test](docs/rfid_ble_integration.md) for wiring,
+UID capture, configuration and hardware acceptance steps.
 
 The relay GPIO is driven to the inactive level at boot because the approved
 relay module is active-high.

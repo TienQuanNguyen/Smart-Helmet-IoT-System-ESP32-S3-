@@ -22,7 +22,7 @@
 #define BIKE_OLED_SCL_GPIO 8
 #define BIKE_OLED_ADDR 0x3C
 
-/* RC522: 3.3 V SPI RFID reader, initialized in a later Bike phase. */
+/* RC522: 3.3 V SPI RFID reader. */
 #define BIKE_RFID_SUPPLY_MV 3300
 #define BIKE_RFID_CS_GPIO 7
 #define BIKE_RFID_SCK_GPIO 4
@@ -30,5 +30,5 @@
 #define BIKE_RFID_MOSI_GPIO 6
 #define BIKE_RFID_RST_GPIO 10
 
-/* Authorization policy selected by the user; UID values are added in BIKE-004. */
+/* UID values are configured in menuconfig > Bike RFID authorization. */
 #define BIKE_RFID_AUTH_POLICY_HARDCODED 1

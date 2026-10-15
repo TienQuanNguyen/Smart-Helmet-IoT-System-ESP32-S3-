@@ -1,0 +1,19 @@
+menu "Bike RFID authorization"
+    config BIKE_RFID_UID_SCAN_ONLY
+        bool "Read UIDs only (relay always locked)"
+        default n
+        help
+            Print real card UIDs without starting BLE or allowing the relay.
+
+    config BIKE_RFID_UID_1
+        string "Authorized card UID 1 (hex, empty denies all)"
+        default ""
+        help
+            Use the real 4, 7 or 10 byte UID printed by rfid_reader.
+            Enter hex without spaces, with optional colons between bytes.
+            This demo allowlist does not provide cryptographic authentication.
+
+    config BIKE_RFID_UID_2
+        string "Authorized card UID 2 (optional)"
+        default ""
+endmenu

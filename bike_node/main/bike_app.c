@@ -1,6 +1,7 @@
 #include "bike_app.h"
 
 #include <inttypes.h>
+#include <stdio.h>
 
 #include "bike_ble_comm.h"
 #include "bike_config.h"
@@ -13,6 +14,7 @@
 #include "freertos/task.h"
 #include "relay_driver.h"
 #include "rfid_reader.h"
+#include "sdkconfig.h"
 
 static const char *TAG = "bike_app";
 
@@ -39,12 +41,14 @@ static esp_err_t bike_app_init_components(void) {
       .miso_gpio = BIKE_RFID_MISO_GPIO,
       .mosi_gpio = BIKE_RFID_MOSI_GPIO,
       .rst_gpio = BIKE_RFID_RST_GPIO,
-      .clock_speed_hz = 1000000U,
+      .clock_speed_hz = 100000U,
   };
   ESP_RETURN_ON_ERROR(rfid_reader_init(&rfid_config), TAG,
                       "RFID reader init failed");
 
+#if !CONFIG_BIKE_RFID_UID_SCAN_ONLY
   ESP_RETURN_ON_ERROR(bike_ble_comm_init(), TAG, "Bike BLE init failed");
+#endif
   return ESP_OK;
 }
 
@@ -72,7 +76,13 @@ esp_err_t bike_app_init(void) {
 
   bike_app_log_pin_map();
   ESP_LOGI(TAG,
-           "BLE runtime ready; RFID UID and OLED validation remain BLOCKED");
+           "RFID ready; scan an allowed UID to request LOCK/UNLOCK; "
+           "unlock requires fresh Helmet READY/DRIVING + alcohol PASS");
+#if CONFIG_BIKE_RFID_UID_SCAN_ONLY
+  ESP_LOGW(TAG, "UID SCAN ONLY: relay locked, BLE disabled");
+#endif
+  if (CONFIG_BIKE_RFID_UID_1[0] == '\0' && CONFIG_BIKE_RFID_UID_2[0] == '\0')
+    ESP_LOGW(TAG, "RFID allowlist empty: all cards denied");
 
   s_initialized = true;
   return ESP_OK;
@@ -85,8 +95,14 @@ void bike_app_run(void) {
   }
 
   uint32_t last_log_ms = 0;
+  bool scan_armed = true;
+  uint32_t last_present_ms = 0;
+  bool last_ignition_allowed = false;
   while (true) {
     const uint32_t uptime_ms = (uint32_t)(esp_timer_get_time() / 1000LL);
+    rfid_reader_uid_t uid;
+    bool card_present = false;
+    esp_err_t rfid_result = rfid_reader_poll_uid(&uid, &card_present);
     ble_helmet_status_packet_t status;
     bool fresh = bike_ble_comm_get_status(&status);
     bool ready = fresh &&
@@ -95,10 +111,49 @@ void bike_app_run(void) {
                  !(status.flags & BLE_HELMET_FLAG_EMERGENCY);
     bike_state_update_helmet(
         fresh, ready, fresh && (status.flags & BLE_HELMET_FLAG_ALCOHOL_PASS));
-    if (relay_driver_set_ignition_allowed(bike_state_is_ignition_allowed()) !=
-        ESP_OK) {
+    if (rfid_result != ESP_OK) {
+      bike_state_set_rfid_authorized(false);
+      scan_armed = false;
+      last_present_ms = uptime_ms;
+    } else if (card_present) {
+      last_present_ms = uptime_ms;
+      if (scan_armed) {
+        scan_armed = false;
+        /* Log the captured UID once per armed scan, not per driver event. */
+        char uid_text[RFID_READER_MAX_UID_LEN * 3];
+        for (size_t i = 0; i < uid.length; ++i)
+          snprintf(uid_text + i * 3, sizeof(uid_text) - i * 3, "%02X%s",
+                   (unsigned)uid.bytes[i], i + 1 < uid.length ? ":" : "");
+        ESP_LOGI(TAG, "Card UID=%s (%u bytes)", uid_text, (unsigned)uid.length);
+#if CONFIG_BIKE_RFID_UID_SCAN_ONLY
+        ESP_LOGI(TAG, "UID capture only: relay request denied");
+#else
+        if (!bike_state_is_hardcoded_uid_allowed(uid.bytes, uid.length)) {
+          ESP_LOGW(TAG, "RFID DENIED: UID is not in allowlist");
+        } else if (!bike_state_request_card(uid.bytes, uid.length)) {
+          ESP_LOGW(TAG, "RFID DENIED: Helmet not ready, stale or alcohol failed");
+        } else {
+          ESP_LOGI(TAG, "RFID request accepted: %s",
+                   bike_state_is_ignition_allowed() ? "UNLOCK" : "LOCK");
+        }
+#endif
+      }
+    } else if (uptime_ms - last_present_ms >= 400) {
+      scan_armed = true;
+    }
+#if CONFIG_BIKE_RFID_UID_SCAN_ONLY
+    bike_state_set_rfid_authorized(false);
+#endif
+    bool allowed = bike_state_is_ignition_allowed();
+    if (relay_driver_set_ignition_allowed(allowed) != ESP_OK) {
       bike_state_set_rfid_authorized(false);
       ESP_LOGE(TAG, "Relay update failed; authorization revoked");
+      relay_driver_set_ignition_allowed(false);
+      return;
+    }
+    if (allowed != last_ignition_allowed) {
+      ESP_LOGI(TAG, "Relay ignition_allowed=%d", allowed);
+      last_ignition_allowed = allowed;
     }
     if (uptime_ms - last_log_ms >= BIKE_HEARTBEAT_PERIOD_MS) {
       ESP_LOGI(TAG,
