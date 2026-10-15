@@ -23,8 +23,7 @@ File tham khảo dùng ESP-NOW cho Helmet và BLE Bluedroid cho ứng dụng đi
 Dự án hiện tại giữ giao thức NimBLE Helmet–Bike đã có, không đổi sang ESP-NOW.
 Không tích hợp chế độ emergency-unlock bỏ qua Helmet/cồn của file tham khảo.
 
-**Cực tính relay khác nhau:** file tham khảo active-low; cấu hình dự án hiện tại
-active-high, GPIO1 HIGH mở và LOW khóa. Giữ nguyên cấu hình dự án; xác nhận
+**Cực tính relay:** cấu hình active-low theo module đang dùng, GPIO1 LOW mở và HIGH khóa. Xác nhận
 module thực tế trước khi nối tải demo. Không sử dụng bản này để cắt động cơ xe.
 
 ## Đấu dây
