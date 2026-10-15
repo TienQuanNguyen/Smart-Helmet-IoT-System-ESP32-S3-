@@ -1,0 +1,20 @@
+dependencies:
+  idf:
+    source:
+      type: idf
+    version: 5.5.4
+  rc522:
+    component_hash: 9c27e34a04634d9444b05710a339634ab683462e2f936486463cd23ceeda39b5
+    dependencies:
+    - name: idf
+      version: '>=5.0'
+    source:
+      git: https://github.com/abobija/esp-idf-rc522.git
+      path: .
+      type: git
+    version: a44b3e774b838ac33841213eead4f66491ee84f5
+direct_dependencies:
+- rc522
+manifest_hash: a130e693262fc1096bfc29b289d245fb44e173a501d6b6c7267e3311e5dea3bf
+target: esp32c3
+version: 2.0.0

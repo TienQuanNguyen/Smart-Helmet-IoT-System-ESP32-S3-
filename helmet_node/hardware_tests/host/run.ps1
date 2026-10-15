@@ -23,6 +23,12 @@ if ($LASTEXITCODE -ne 0) { throw 'Host compilation failed' }
 & $output
 if ($LASTEXITCODE -ne 0) { throw 'Host tests failed' }
 
+$rfidOutput = Join-Path $env:TEMP 'smart_helmet_rfid_tests.exe'
+& gcc @flags "$PSScriptRoot/test_rfid_allowlist.c" -o $rfidOutput
+if ($LASTEXITCODE -ne 0) { throw 'RFID host compilation failed' }
+& $rfidOutput
+if ($LASTEXITCODE -ne 0) { throw 'RFID host tests failed' }
+
 $idfRoot = $env:IDF_PATH
 if (-not $idfRoot) { $idfRoot = 'D:/esp/v5.5.4/esp-idf' }
 $jsonRoot = Join-Path $idfRoot 'components/json/cJSON'

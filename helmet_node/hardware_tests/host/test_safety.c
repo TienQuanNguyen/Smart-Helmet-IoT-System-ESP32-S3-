@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "bike_state.h"
+#include "rfid_uid_match.h"
 #include "driver/gpio.h"
 #include "driver/ledc.h"
 #include "gps_driver.h"
@@ -71,6 +72,23 @@ static void test_authorization(void) {
   CHECK(!bike_state_is_ignition_allowed());
   uint8_t uid[] = {1, 2, 3, 4};
   CHECK(!bike_state_is_hardcoded_uid_allowed(uid, sizeof(uid)));
+  CHECK(!rfid_uid_matches(uid, sizeof(uid), ""));
+  CHECK(rfid_uid_matches(uid, sizeof(uid), "01:02:03:04"));
+  CHECK(rfid_uid_matches(uid, sizeof(uid), "01020304"));
+  CHECK(!rfid_uid_matches(uid, sizeof(uid), "01:02:03:05"));
+  CHECK(!rfid_uid_matches(uid, sizeof(uid), "01:02:03"));
+  CHECK(!rfid_uid_matches(uid, sizeof(uid), "01:02:03:04:05"));
+  CHECK(!rfid_uid_matches(uid, sizeof(uid), "01-02-03-04"));
+  CHECK(!rfid_uid_matches(uid, sizeof(uid), "01:02:03:0G"));
+  CHECK(!rfid_uid_matches(uid, sizeof(uid), " 01:02:03:04"));
+  CHECK(!rfid_uid_matches(NULL, 4, "01020304"));
+  CHECK(!rfid_uid_matches(uid, 4, NULL));
+  uint8_t long_uid[] = {0x04, 0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6, 7, 8, 9};
+  CHECK(rfid_uid_matches(long_uid, 7, "04:a1:b2:c3:d4:e5:f6"));
+  CHECK(rfid_uid_matches(long_uid, 10, "04:A1:B2:C3:D4:E5:F6:07:08:09"));
+  CHECK(rfid_uid_matches(long_uid, 10, "04A1B2C3D4E5F6070809"));
+  CHECK(!rfid_uid_matches(long_uid, 7, "04:A1:B2:C3"));
+  CHECK(!rfid_uid_matches(long_uid, 5, "04A1B2C3D4"));
 }
 static void test_fsm(void) {
   CHECK(system_state_init());

@@ -1,0 +1,4 @@
+dependencies:
+  rc522:
+    git: https://github.com/abobija/esp-idf-rc522.git
+    version: a44b3e774b838ac33841213eead4f66491ee84f5
