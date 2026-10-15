@@ -22,7 +22,7 @@ Mất giao tiếp kéo dài có thể được nhận là lấy thẻ ra; cần 
 | GND | GND |
 | IRQ | Để trống |
 
-SDA trên module là chân CS của SPI. Dùng nguồn và logic 3.3V, không cấp 5V vào RC522. Kiểm tra trên bàn với tải mô phỏng; relay hiện dùng GPIO1, LOW là khóa.
+SDA trên module là chân CS của SPI. Dùng nguồn và logic 3.3V, không cấp 5V vào RC522. Kiểm tra trên bàn với tải mô phỏng; relay hiện dùng GPIO1, HIGH là khóa và LOW là mở.
 
 ## Nạp bản ứng dụng thông thường và đọc UID
 

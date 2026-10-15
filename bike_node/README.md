@@ -24,7 +24,7 @@ See [RFID and BLE integration test](docs/rfid_ble_integration.md) for wiring,
 UID capture, configuration and hardware acceptance steps.
 
 The relay GPIO is driven to the inactive level at boot because the approved
-relay module is active-high.
+relay module is active-low.
 
 ## Project structure
 
@@ -43,7 +43,7 @@ bike_node/
 
 | Signal | GPIO | Notes |
 |---|---:|---|
-| Relay control | 1 | Active high; inactive LOW at boot |
+| Relay control | 1 | Active low; inactive HIGH at boot |
 | OLED SDA | 9 | OLED is required |
 | OLED SCL | 8 | OLED is required |
 | OLED address | 0x3C | I2C address |

@@ -9,10 +9,10 @@
 #define BIKE_HARDWARE_TEST_MODE 0
 #define BIKE_HARDWARE_TEST_PHASE 1
 
-/* Relay: active-high module. Inactive LOW is the safe boot state. */
+/* Relay: active-low module. Inactive HIGH is the safe boot state. */
 #define BIKE_RELAY_GPIO 1
-#define BIKE_RELAY_ACTIVE_LEVEL 1
-#define BIKE_RELAY_INACTIVE_LEVEL 0
+#define BIKE_RELAY_ACTIVE_LEVEL 0
+#define BIKE_RELAY_INACTIVE_LEVEL 1
 #define BIKE_RELAY_CONTACT_SUPPLY_MV 5000
 #define BIKE_RELAY_MODULE_VCC_MV 3300
 
