@@ -1,0 +1,273 @@
+[0;32mI (15314) bike_app: BIKE-001 heartbeat uptime_ms=15040 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (20314) bike_app: BIKE-001 heartbeat uptime_ms=20047 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (23094) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (23094) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (23094) NimBLE: duration=10000ms[0m
+[0;32mI (23094) NimBLE: [0m
+
+[0;32mI (25324) bike_app: BIKE-001 heartbeat uptime_ms=25050 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (25944) NimBLE: GAP procedure initiated: connect; [0m
+[0;32mI (25944) NimBLE: peer_addr_type=0 peer_addr=[0m
+[0;32mI (25944) NimBLE: 20:6e:f1:a1:c7:96[0m
+[0;32mI (25944) NimBLE:  scan_itvl=16 scan_window=16 itvl_min=24 itvl_max=40 latency=0 supervision_timeout=256 min_ce_len=0 max_ce_len=0 own_addr_type=0[0m
+[0;32mI (25964) NimBLE: [0m
+
+[0;32mI (26184) bike_ble: Helmet connected; discovering service[0m
+[0;32mI (26184) NimBLE: GATT procedure initiated: discover service by uuid; uuid=[0m
+[0;32mI (26184) NimBLE: 9f0d0001-6c83-4c0d-9b2b-48e150000001[0m
+[0;32mI (26184) NimBLE: [0m
+
+[0;32mI (28784) NimBLE: GAP procedure initiated: terminate connection; conn_handle=1 hci_reason=19[0m
+
+[0;33mW (28784) bike_ble: Helmet disconnected; authorization revoked[0m
+[0;32mI (30334) bike_app: BIKE-001 heartbeat uptime_ms=30067 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (32784) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (32784) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (32784) NimBLE: duration=10000ms[0m
+[0;32mI (32794) NimBLE: [0m
+
+[0;32mI (32814) NimBLE: GAP procedure initiated: connect; [0m
+[0;32mI (32814) NimBLE: peer_addr_type=0 peer_addr=[0m
+[0;32mI (32814) NimBLE: 20:6e:f1:a1:c7:96[0m
+[0;32mI (32814) NimBLE:  scan_itvl=16 scan_window=16 itvl_min=24 itvl_max=40 latency=0 supervision_timeout=256 min_ce_len=0 max_ce_len=0 own_addr_type=0[0m
+[0;32mI (32834) NimBLE: [0m
+
+[0;32mI (33084) bike_ble: Helmet connected; discovering service[0m
+[0;32mI (33084) NimBLE: GATT procedure initiated: discover service by uuid; uuid=[0m
+[0;32mI (33084) NimBLE: 9f0d0001-6c83-4c0d-9b2b-48e150000001[0m
+[0;32mI (33084) NimBLE: [0m
+
+[0;32mI (33334) NimBLE: GATT procedure initiated: discover all characteristics; [0m
+[0;32mI (33334) NimBLE: start_handle=14 end_handle=19[0m
+
+[0;32mI (33684) NimBLE: GATT procedure initiated: discover all descriptors; [0m
+[0;32mI (33684) NimBLE: chr_val_handle=16 end_handle=17[0m
+
+[0;32mI (33834) NimBLE: GATT procedure initiated: write; [0m
+[0;32mI (33834) NimBLE: att_handle=17 len=2[0m
+
+[0;32mI (33984) bike_ble: Helmet notifications subscribed[0m
+[0;32mI (35354) bike_app: BIKE-001 heartbeat uptime_ms=35080 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (36004) bike_app: Card UID=57:6B:6A:05 (4 bytes)[0m
+[0;33mW (36004) bike_app: RFID DENIED: Helmet not ready, stale or alcohol failed[0m
+[0;32mI (37094) rfid_reader: Card removed or communication lost[0m
+[0;32mI (40354) bike_app: BIKE-001 heartbeat uptime_ms=40080 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (42614) bike_app: Card UID=57:6B:6A:05 (4 bytes)[0m
+[0;33mW (42614) bike_app: RFID DENIED: Helmet not ready, stale or alcohol failed[0m
+[0;32mI (44264) rfid_reader: Card removed or communication lost[0m
+[0;32mI (45354) bike_app: BIKE-001 heartbeat uptime_ms=45080 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (50354) bike_app: BIKE-001 heartbeat uptime_ms=50087 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (55364) bike_app: BIKE-001 heartbeat uptime_ms=55090 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (60364) bike_app: BIKE-001 heartbeat uptime_ms=60097 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (65374) bike_app: BIKE-001 heartbeat uptime_ms=65100 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (70374) bike_app: BIKE-001 heartbeat uptime_ms=70107 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (75384) bike_app: BIKE-001 heartbeat uptime_ms=75110 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (80384) bike_app: BIKE-001 heartbeat uptime_ms=80117 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (85394) bike_app: BIKE-001 heartbeat uptime_ms=85120 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (90394) bike_app: BIKE-001 heartbeat uptime_ms=90127 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (95404) bike_app: BIKE-001 heartbeat uptime_ms=95130 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;33mW (95434) bike_ble: Helmet disconnected; authorization revoked[0m
+[0;32mI (96434) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (96434) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (96434) NimBLE: duration=10000ms[0m
+[0;32mI (96434) NimBLE: [0m
+
+[0;32mI (100404) bike_app: BIKE-001 heartbeat uptime_ms=100137 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (105414) bike_app: BIKE-001 heartbeat uptime_ms=105140 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (108444) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (108444) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (108444) NimBLE: duration=10000ms[0m
+[0;32mI (108444) NimBLE: [0m
+
+[0;32mI (110414) bike_app: BIKE-001 heartbeat uptime_ms=110147 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (115424) bike_app: BIKE-001 heartbeat uptime_ms=115150 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (120424) bike_app: BIKE-001 heartbeat uptime_ms=120157 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (122454) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (122454) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (122454) NimBLE: duration=10000ms[0m
+[0;32mI (122454) NimBLE: [0m
+
+[0;32mI (125434) bike_app: BIKE-001 heartbeat uptime_ms=125160 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (130434) bike_app: BIKE-001 heartbeat uptime_ms=130167 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (135444) bike_app: BIKE-001 heartbeat uptime_ms=135170 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (140444) bike_app: BIKE-001 heartbeat uptime_ms=140177 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (140464) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (140464) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (140464) NimBLE: duration=10000ms[0m
+[0;32mI (140464) NimBLE: [0m
+
+[0;32mI (145454) bike_app: BIKE-001 heartbeat uptime_ms=145180 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (150454) bike_app: BIKE-001 heartbeat uptime_ms=150187 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (155464) bike_app: BIKE-001 heartbeat uptime_ms=155190 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (160464) bike_app: BIKE-001 heartbeat uptime_ms=160197 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (165474) bike_app: BIKE-001 heartbeat uptime_ms=165200 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (166464) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (166464) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (166474) NimBLE: duration=10000ms[0m
+[0;32mI (166474) NimBLE: [0m
+
+[0;32mI (170474) bike_app: BIKE-001 heartbeat uptime_ms=170207 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (175484) bike_app: BIKE-001 heartbeat uptime_ms=175210 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (180484) bike_app: BIKE-001 heartbeat uptime_ms=180217 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (185494) bike_app: BIKE-001 heartbeat uptime_ms=185220 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (190494) bike_app: BIKE-001 heartbeat uptime_ms=190227 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (195504) bike_app: BIKE-001 heartbeat uptime_ms=195230 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (200504) bike_app: BIKE-001 heartbeat uptime_ms=200237 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (205514) bike_app: BIKE-001 heartbeat uptime_ms=205240 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (206474) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (206474) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (206484) NimBLE: duration=10000ms[0m
+[0;32mI (206484) NimBLE: [0m
+
+[0;32mI (210514) bike_app: BIKE-001 heartbeat uptime_ms=210247 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (215524) bike_app: BIKE-001 heartbeat uptime_ms=215250 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (220524) bike_app: BIKE-001 heartbeat uptime_ms=220257 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (225534) bike_app: BIKE-001 heartbeat uptime_ms=225260 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (230534) bike_app: BIKE-001 heartbeat uptime_ms=230267 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (235544) bike_app: BIKE-001 heartbeat uptime_ms=235270 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (240544) bike_app: BIKE-001 heartbeat uptime_ms=240277 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (245554) bike_app: BIKE-001 heartbeat uptime_ms=245280 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (246484) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (246484) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (246484) NimBLE: duration=10000ms[0m
+[0;32mI (246494) NimBLE: [0m
+
+[0;32mI (250554) bike_app: BIKE-001 heartbeat uptime_ms=250287 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (255564) bike_app: BIKE-001 heartbeat uptime_ms=255290 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (260564) bike_app: BIKE-001 heartbeat uptime_ms=260297 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (265574) bike_app: BIKE-001 heartbeat uptime_ms=265300 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (270574) bike_app: BIKE-001 heartbeat uptime_ms=270307 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (275584) bike_app: BIKE-001 heartbeat uptime_ms=275310 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (280584) bike_app: BIKE-001 heartbeat uptime_ms=280317 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (285594) bike_app: BIKE-001 heartbeat uptime_ms=285320 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (286494) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (286494) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (286494) NimBLE: duration=10000ms[0m
+[0;32mI (286504) NimBLE: [0m
+
+[0;32mI (290594) bike_app: BIKE-001 heartbeat uptime_ms=290327 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (295604) bike_app: BIKE-001 heartbeat uptime_ms=295330 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (300604) bike_app: BIKE-001 heartbeat uptime_ms=300337 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (305614) bike_app: BIKE-001 heartbeat uptime_ms=305340 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (310614) bike_app: BIKE-001 heartbeat uptime_ms=310347 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (315624) bike_app: BIKE-001 heartbeat uptime_ms=315350 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (320624) bike_app: BIKE-001 heartbeat uptime_ms=320357 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (325634) bike_app: BIKE-001 heartbeat uptime_ms=325360 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (326504) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (326504) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (326504) NimBLE: duration=10000ms[0m
+[0;32mI (326514) NimBLE: [0m
+
+[0;32mI (330644) bike_app: BIKE-001 heartbeat uptime_ms=330377 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (335654) bike_app: BIKE-001 heartbeat uptime_ms=335380 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (340654) bike_app: BIKE-001 heartbeat uptime_ms=340387 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (345664) bike_app: BIKE-001 heartbeat uptime_ms=345390 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (350664) bike_app: BIKE-001 heartbeat uptime_ms=350397 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (355674) bike_app: BIKE-001 heartbeat uptime_ms=355400 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (360674) bike_app: BIKE-001 heartbeat uptime_ms=360407 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (365684) bike_app: BIKE-001 heartbeat uptime_ms=365410 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (366514) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (366514) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (366514) NimBLE: duration=10000ms[0m
+[0;32mI (366514) NimBLE: [0m
+
+[0;32mI (370684) bike_app: BIKE-001 heartbeat uptime_ms=370417 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (372324) NimBLE: GAP procedure initiated: connect; [0m
+[0;32mI (372324) NimBLE: peer_addr_type=0 peer_addr=[0m
+[0;32mI (372324) NimBLE: 20:6e:f1:a1:c7:96[0m
+[0;32mI (372324) NimBLE:  scan_itvl=16 scan_window=16 itvl_min=24 itvl_max=40 latency=0 supervision_timeout=256 min_ce_len=0 max_ce_len=0 own_addr_type=0[0m
+[0;32mI (372334) NimBLE: [0m
+
+[0;32mI (372484) bike_ble: Helmet connected; discovering service[0m
+[0;32mI (372484) NimBLE: GATT procedure initiated: discover service by uuid; uuid=[0m
+[0;32mI (372484) NimBLE: 9f0d0001-6c83-4c0d-9b2b-48e150000001[0m
+[0;32mI (372484) NimBLE: [0m
+
+[0;32mI (372734) NimBLE: GATT procedure initiated: discover all characteristics; [0m
+[0;32mI (372734) NimBLE: start_handle=14 end_handle=19[0m
+
+[0;32mI (373184) NimBLE: GATT procedure initiated: discover all descriptors; [0m
+[0;32mI (373184) NimBLE: chr_val_handle=16 end_handle=17[0m
+
+[0;32mI (373284) NimBLE: GATT procedure initiated: write; [0m
+[0;32mI (373284) NimBLE: att_handle=17 len=2[0m
+
+[0;32mI (373434) bike_ble: Helmet notifications subscribed[0m
+[0;32mI (375694) bike_app: BIKE-001 heartbeat uptime_ms=375420 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (379164) NimBLE: GAP procedure initiated: terminate connection; conn_handle=1 hci_reason=19[0m
+
+[0;33mW (379284) bike_ble: Helmet disconnected; authorization revoked[0m
+[0;32mI (380284) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (380284) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (380284) NimBLE: duration=10000ms[0m
+[0;32mI (380284) NimBLE: [0m
+
+[0;32mI (380694) bike_app: BIKE-001 heartbeat uptime_ms=380427 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (385704) bike_app: BIKE-001 heartbeat uptime_ms=385430 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (390704) bike_app: BIKE-001 heartbeat uptime_ms=390437 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (392294) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (392294) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (392294) NimBLE: duration=10000ms[0m
+[0;32mI (392294) NimBLE: [0m
+
+[0;32mI (395284) NimBLE: GAP procedure initiated: connect; [0m
+[0;32mI (395284) NimBLE: peer_addr_type=0 peer_addr=[0m
+[0;32mI (395284) NimBLE: 20:6e:f1:a1:c7:96[0m
+[0;32mI (395284) NimBLE:  scan_itvl=16 scan_window=16 itvl_min=24 itvl_max=40 latency=0 supervision_timeout=256 min_ce_len=0 max_ce_len=0 own_addr_type=0[0m
+[0;32mI (395294) NimBLE: [0m
+
+[0;32mI (395714) bike_app: BIKE-001 heartbeat uptime_ms=395440 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (397984) NimBLE: ogf=0x01, ocf=0x001d, hci_err=0x202 : BLE_ERR_UNK_CONN_ID (Unknown Connection Identifier)[0m
+
+[0;33mW (397984) bike_ble: Helmet disconnected; authorization revoked[0m
+[0;32mI (400714) bike_app: BIKE-001 heartbeat uptime_ms=400447 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (401984) NimBLE: GAP procedure initiated: discovery; [0m
+[0;32mI (401984) NimBLE: own_addr_type=0 filter_policy=0 passive=1 limited=0 filter_duplicates=1 [0m
+[0;32mI (401984) NimBLE: duration=10000ms[0m
+[0;32mI (401994) NimBLE: [0m
+
+[0;32mI (402004) NimBLE: GAP procedure initiated: connect; [0m
+[0;32mI (402004) NimBLE: peer_addr_type=0 peer_addr=[0m
+[0;32mI (402004) NimBLE: 20:6e:f1:a1:c7:96[0m
+[0;32mI (402004) NimBLE:  scan_itvl=16 scan_window=16 itvl_min=24 itvl_max=40 latency=0 supervision_timeout=256 min_ce_len=0 max_ce_len=0 own_addr_type=0[0m
+[0;32mI (402024) NimBLE: [0m
+
+[0;32mI (402134) bike_ble: Helmet connected; discovering service[0m
+[0;32mI (402134) NimBLE: GATT procedure initiated: discover service by uuid; uuid=[0m
+[0;32mI (402134) NimBLE: 9f0d0001-6c83-4c0d-9b2b-48e150000001[0m
+[0;32mI (402134) NimBLE: [0m
+
+[0;32mI (402384) NimBLE: GATT procedure initiated: discover all characteristics; [0m
+[0;32mI (402384) NimBLE: start_handle=14 end_handle=19[0m
+
+[0;32mI (402834) NimBLE: GATT procedure initiated: discover all descriptors; [0m
+[0;32mI (402834) NimBLE: chr_val_handle=16 end_handle=17[0m
+
+[0;32mI (402934) NimBLE: GATT procedure initiated: write; [0m
+[0;32mI (402934) NimBLE: att_handle=17 len=2[0m
+
+[0;32mI (403184) bike_ble: Helmet notifications subscribed[0m
+[0;32mI (405734) bike_app: BIKE-001 heartbeat uptime_ms=405460 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (410734) bike_app: BIKE-001 heartbeat uptime_ms=410467 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (413524) bike_app: Card UID=57:6B:6A:05 (4 bytes)[0m
+[0;33mW (413524) bike_app: RFID DENIED: Helmet not ready, stale or alcohol failed[0m
+[0;32mI (415714) rfid_reader: Card removed or communication lost[0m
+[0;32mI (415744) bike_app: BIKE-001 heartbeat uptime_ms=415470 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (420754) bike_app: BIKE-001 heartbeat uptime_ms=420487 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (425764) bike_app: BIKE-001 heartbeat uptime_ms=425490 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (430764) bike_app: BIKE-001 heartbeat uptime_ms=430497 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (435774) bike_app: BIKE-001 heartbeat uptime_ms=435500 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (440774) bike_app: BIKE-001 heartbeat uptime_ms=440507 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (445784) bike_app: BIKE-001 heartbeat uptime_ms=445510 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (450784) bike_app: BIKE-001 heartbeat uptime_ms=450517 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (453504) bike_app: Card UID=57:6B:6A:05 (4 bytes)[0m
+[0;33mW (453504) bike_app: RFID DENIED: Helmet not ready, stale or alcohol failed[0m
+[0;32mI (454434) rfid_reader: Card removed or communication lost[0m
+[0;32mI (455804) bike_app: BIKE-001 heartbeat uptime_ms=455530 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (460804) bike_app: BIKE-001 heartbeat uptime_ms=460537 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (465814) bike_app: BIKE-001 heartbeat uptime_ms=465540 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (470814) bike_app: BIKE-001 heartbeat uptime_ms=470547 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (475824) bike_app: BIKE-001 heartbeat uptime_ms=475550 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (480824) bike_app: BIKE-001 heartbeat uptime_ms=480557 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (485834) bike_app: BIKE-001 heartbeat uptime_ms=485560 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (490834) bike_app: BIKE-001 heartbeat uptime_ms=490567 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m

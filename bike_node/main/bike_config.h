@@ -5,7 +5,8 @@
 
 #define BIKE_HEARTBEAT_PERIOD_MS 5000U
 
-/* Set to 1 to run one isolated Bike hardware test instead of the application. */
+/* Set to 1 to run one isolated Bike hardware test instead of the application.
+ */
 #define BIKE_HARDWARE_TEST_MODE 0
 #define BIKE_HARDWARE_TEST_PHASE 1
 

@@ -1,0 +1,54 @@
+[0;32mI (505854) bike_app: BIKE-001 heartbeat uptime_ms=505580 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (510854) bike_app: BIKE-001 heartbeat uptime_ms=510587 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (515864) bike_app: BIKE-001 heartbeat uptime_ms=515590 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (520864) bike_app: BIKE-001 heartbeat uptime_ms=520597 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (525874) bike_app: BIKE-001 heartbeat uptime_ms=525600 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (530874) bike_app: BIKE-001 heartbeat uptime_ms=530607 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (535884) bike_app: BIKE-001 heartbeat uptime_ms=535610 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (540884) bike_app: BIKE-001 heartbeat uptime_ms=540617 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (545894) bike_app: BIKE-001 heartbeat uptime_ms=545620 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (550894) bike_app: BIKE-001 heartbeat uptime_ms=550627 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (555904) bike_app: BIKE-001 heartbeat uptime_ms=555630 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (560904) bike_app: BIKE-001 heartbeat uptime_ms=560637 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (565914) bike_app: BIKE-001 heartbeat uptime_ms=565640 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (570914) bike_app: BIKE-001 heartbeat uptime_ms=570647 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (575924) bike_app: BIKE-001 heartbeat uptime_ms=575650 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (580924) bike_app: BIKE-001 heartbeat uptime_ms=580657 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (585934) bike_app: BIKE-001 heartbeat uptime_ms=585660 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (590934) bike_app: BIKE-001 heartbeat uptime_ms=590667 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (595944) bike_app: BIKE-001 heartbeat uptime_ms=595670 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (600944) bike_app: BIKE-001 heartbeat uptime_ms=600677 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (605554) bike_app: Card UID=57:6B:6A:05 (4 bytes)[0m
+[0;32mI (605554) bike_app: RFID request accepted: UNLOCK[0m
+[0;32mI (605554) relay_driver: Ignition allowed=1 relay_level=0[0m
+[0;32mI (605564) bike_app: Relay ignition_allowed=1[0m
+[0;32mI (605954) bike_app: BIKE-001 heartbeat uptime_ms=605680 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (606554) rfid_reader: Card removed or communication lost[0m
+[0;32mI (607314) bike_app: Card UID=57:6B:6A:05 (4 bytes)[0m
+[0;32mI (607314) bike_app: RFID request accepted: LOCK[0m
+[0;32mI (607314) relay_driver: Ignition allowed=0 relay_level=1[0m
+[0;32mI (607324) bike_app: Relay ignition_allowed=0[0m
+[1;31mE (607744) rc522: rc522_picc_transceive(206): F523[0m
+[1;31mE (607774) rc522: rc522_picc_transceive(206): F523[0m
+[0;32mI (607864) rfid_reader: Card removed or communication lost[0m
+[0;32mI (610964) bike_app: BIKE-001 heartbeat uptime_ms=610691 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (611804) rfid_reader: Card removed or communication lost[0m
+[0;32mI (615974) bike_app: BIKE-001 heartbeat uptime_ms=615700 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
+[0;32mI (620684) bike_app: Card UID=1C:58:0C:06 (4 bytes)[0m
+[0;32mI (620684) bike_app: RFID request accepted: UNLOCK[0m
+[0;32mI (620684) relay_driver: Ignition allowed=1 relay_level=0[0m
+[0;32mI (620694) bike_app: Relay ignition_allowed=1[0m
+[0;32mI (620974) bike_app: BIKE-001 heartbeat uptime_ms=620700 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (622064) rfid_reader: Card removed or communication lost[0m
+[0;32mI (625984) bike_app: BIKE-001 heartbeat uptime_ms=625717 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (630994) bike_app: BIKE-001 heartbeat uptime_ms=630720 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (635994) bike_app: BIKE-001 heartbeat uptime_ms=635727 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (641004) bike_app: BIKE-001 heartbeat uptime_ms=640730 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (646004) bike_app: BIKE-001 heartbeat uptime_ms=645737 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (651014) bike_app: BIKE-001 heartbeat uptime_ms=650740 free_heap=198484 state=READY ignition_allowed=1[0m
+[0;32mI (651944) bike_app: Card UID=57:6B:6A:05 (4 bytes)[0m
+[0;32mI (651944) bike_app: RFID request accepted: LOCK[0m
+[0;32mI (651944) relay_driver: Ignition allowed=0 relay_level=1[0m
+[0;32mI (651954) bike_app: Relay ignition_allowed=0[0m
+[0;32mI (653124) rfid_reader: Card removed or communication lost[0m
+[0;32mI (656014) bike_app: BIKE-001 heartbeat uptime_ms=655740 free_heap=198484 state=WAIT_RFID ignition_allowed=0[0m
