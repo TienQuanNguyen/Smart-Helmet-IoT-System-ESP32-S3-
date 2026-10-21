@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include "esp_err.h"
 #define HTTP_METHOD_POST 1
+#define HTTP_METHOD_PATCH 2
 typedef void *esp_http_client_handle_t;
 typedef struct {
   const char *url;

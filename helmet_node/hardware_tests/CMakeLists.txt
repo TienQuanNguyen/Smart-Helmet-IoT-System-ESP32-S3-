@@ -15,6 +15,8 @@ idf_component_register(
         spi_flash
         driver
         esp_adc
+        esp_rom
+        esp_timer
         freertos
         log
         mpu6050_driver

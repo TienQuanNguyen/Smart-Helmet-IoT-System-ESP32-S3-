@@ -17,11 +17,17 @@
 #define MPU6050_REG_CONFIG 0x1A
 #define MPU6050_REG_GYRO_CONFIG 0x1B
 #define MPU6050_REG_ACCEL_CONFIG 0x1C
+#define MPU6050_REG_INT_PIN_CFG 0x37
+#define MPU6050_REG_INT_ENABLE 0x38
+#define MPU6050_REG_INT_STATUS 0x3A
 #define MPU6050_REG_ACCEL_XOUT_H 0x3B
 #define MPU6050_REG_PWR_MGMT_1 0x6B
 #define MPU6050_REG_WHO_AM_I 0x75
 
 #define MPU6050_PWR_WAKEUP 0x00
+#define MPU6050_PWR_RESET 0x80
+#define MPU6050_INT_PIN_CONFIG 0x30
+#define MPU6050_DATA_READY_ENABLE 0x01
 #define MPU6050_RAW_FRAME_LEN 14
 
 static const char *TAG = "mpu6050_driver";
@@ -231,6 +237,12 @@ bool mpu6050_init_with_config(const mpu6050_config_t *config) {
     return false;
   }
 
+  /* The sensor can remain powered across an ESP32 reset. */
+  if (!mpu6050_write_register(MPU6050_REG_PWR_MGMT_1, MPU6050_PWR_RESET)) {
+    return false;
+  }
+  vTaskDelay(pdMS_TO_TICKS(100));
+
   if (!mpu6050_write_register(MPU6050_REG_PWR_MGMT_1, MPU6050_PWR_WAKEUP)) {
     return false;
   }
@@ -264,6 +276,15 @@ bool mpu6050_init_with_config(const mpu6050_config_t *config) {
   }
   if (who_am_i != MPU6050_DEFAULT_ADDRESS) {
     ESP_LOGE(TAG, "Unexpected WHO_AM_I: 0x%02X", who_am_i);
+    return false;
+  }
+
+  uint8_t pending_interrupt = 0;
+  if (!mpu6050_write_register(MPU6050_REG_INT_PIN_CFG,
+                              MPU6050_INT_PIN_CONFIG) ||
+      !mpu6050_read_registers(MPU6050_REG_INT_STATUS, &pending_interrupt, 1) ||
+      !mpu6050_write_register(MPU6050_REG_INT_ENABLE,
+                              MPU6050_DATA_READY_ENABLE)) {
     return false;
   }
 

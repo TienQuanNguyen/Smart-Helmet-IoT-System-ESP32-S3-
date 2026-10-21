@@ -1,0 +1,175 @@
+[0;32mI (6761) ble_comm: Bike connected[0m
+[0;32mI (7661) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (7661) NimBLE: att_handle=16[0m
+
+[0;32mI (8411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (8411) NimBLE: att_handle=16[0m
+
+[0;32mI (9411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (9411) NimBLE: att_handle=16[0m
+
+[0;32mI (10411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (10411) NimBLE: att_handle=16[0m
+
+[0;32mI (11411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (11411) NimBLE: att_handle=16[0m
+
+[0;32mI (12411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (12411) NimBLE: att_handle=16[0m
+
+[0;32mI (13411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (13411) NimBLE: att_handle=16[0m
+
+[0;32mI (14411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (14411) NimBLE: att_handle=16[0m
+
+[0;32mI (15411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (15411) NimBLE: att_handle=16[0m
+
+[0;32mI (16411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (16411) NimBLE: att_handle=16[0m
+
+[0;32mI (17411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (17411) NimBLE: att_handle=16[0m
+
+[0;32mI (18411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (18411) NimBLE: att_handle=16[0m
+
+[0;32mI (19411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (19411) NimBLE: att_handle=16[0m
+
+[0;32mI (20411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (20411) NimBLE: att_handle=16[0m
+
+[0;32mI (21411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (21411) NimBLE: att_handle=16[0m
+
+[0;32mI (22411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (22411) NimBLE: att_handle=16[0m
+
+[0;32mI (23411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (23411) NimBLE: att_handle=16[0m
+
+[0;32mI (24411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (24411) NimBLE: att_handle=16[0m
+
+[0;32mI (25411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (25411) NimBLE: att_handle=16[0m
+
+[0;32mI (26411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (26411) NimBLE: att_handle=16[0m
+
+[0;32mI (27411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (27411) NimBLE: att_handle=16[0m
+
+[0;32mI (28411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (28411) NimBLE: att_handle=16[0m
+
+[0;32mI (29411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (29411) NimBLE: att_handle=16[0m
+
+[0;32mI (30411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (30411) NimBLE: att_handle=16[0m
+
+[0;32mI (31411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (31411) NimBLE: att_handle=16[0m
+
+[0;32mI (32411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (32411) NimBLE: att_handle=16[0m
+
+[0;32mI (33411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (33411) NimBLE: att_handle=16[0m
+
+[0;32mI (34411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (34411) NimBLE: att_handle=16[0m
+
+[0;32mI (35411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (35411) NimBLE: att_handle=16[0m
+
+[0;32mI (36411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (36411) NimBLE: att_handle=16[0m
+
+[0;32mI (37411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (37411) NimBLE: att_handle=16[0m
+
+[0;32mI (38411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (38411) NimBLE: att_handle=16[0m
+
+[0;32mI (39411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (39411) NimBLE: att_handle=16[0m
+
+[0;32mI (40411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (40411) NimBLE: att_handle=16[0m
+
+[0;32mI (41411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (41411) NimBLE: att_handle=16[0m
+
+[0;32mI (42411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (42411) NimBLE: att_handle=16[0m
+
+[0;32mI (43411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (43411) NimBLE: att_handle=16[0m
+
+[0;32mI (44411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (44411) NimBLE: att_handle=16[0m
+
+[0;32mI (45411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (45411) NimBLE: att_handle=16[0m
+
+[0;32mI (46411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (46411) NimBLE: att_handle=16[0m
+
+[0;32mI (47411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (47411) NimBLE: att_handle=16[0m
+
+[0;32mI (48411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (48411) NimBLE: att_handle=16[0m
+
+[0;32mI (49411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (49411) NimBLE: att_handle=16[0m
+
+[0;32mI (50411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (50411) NimBLE: att_handle=16[0m
+
+[0;32mI (51411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (51411) NimBLE: att_handle=16[0m
+
+[0;32mI (52411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (52411) NimBLE: att_handle=16[0m
+
+[0;32mI (53411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (53411) NimBLE: att_handle=16[0m
+
+[0;32mI (54411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (54411) NimBLE: att_handle=16[0m
+
+[0;32mI (55411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (55411) NimBLE: att_handle=16[0m
+
+[0;32mI (56411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (56411) NimBLE: att_handle=16[0m
+
+[0;32mI (57411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (57411) NimBLE: att_handle=16[0m
+
+[0;32mI (58411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (58411) NimBLE: att_handle=16[0m
+
+[0;32mI (59411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (59411) NimBLE: att_handle=16[0m
+
+[0;32mI (60411) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (60411) SMART_HELMET_IOT: health uptime=60013 heap=160468 min_heap=155460 stack=2048[0m
+[0;32mI (60411) NimBLE: att_handle=16[0m
+
+[0;32mI (61291) SMART_HELMET_IOT: MQ-3 raw_avg=0 voltage_avg=0.000V result=PASS sensor_ok=1[0m
+[0;32mI (61291) SMART_HELMET_IOT: System event: ALCOHOL_PASS[0m
+[0;32mI (61291) system_state: State transition: STARTUP_ALCOHOL_CHECK -> READY_TO_RIDE[0m
+[0;32mI (61291) SMART_HELMET_IOT: System state: READY_TO_RIDE[0m
+[0;32mI (61291) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (61301) NimBLE: att_handle=16[0m
+
+[0;32mI (61321) system_state: State transition: READY_TO_RIDE -> DRIVING_MONITORING[0m
+[0;32mI (61321) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (61321) NimBLE: att_handle=16[0m
+

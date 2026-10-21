@@ -1,0 +1,475 @@
+[0;32mI (113073) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (113073) NimBLE: att_handle=16[0m
+
+[0;32mI (114073) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (114073) NimBLE: att_handle=16[0m
+
+[0;32mI (115073) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (115073) NimBLE: att_handle=16[0m
+
+[0;32mI (115503) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (116073) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (116073) NimBLE: att_handle=16[0m
+
+[0;32mI (116393) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (117073) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (117073) NimBLE: att_handle=16[0m
+
+[0;32mI (118073) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (118073) NimBLE: att_handle=16[0m
+
+[0;32mI (119073) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (119073) NimBLE: att_handle=16[0m
+
+[0;32mI (119833) SMART_HELMET_IOT: System event: SOS_PRESSED[0m
+[0;32mI (119833) SMART_HELMET_IOT: System state: EMERGENCY_REPORTING[0m
+[0;32mI (119833) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (119833) NimBLE: att_handle=16[0m
+
+[0;32mI (120083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (120083) NimBLE: att_handle=16[0m
+
+[0;32mI (120333) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (120463) SMART_HELMET_IOT: health uptime=120023 heap=116008 min_heap=103780 stack=1964[0m
+[0;32mI (121083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (121083) NimBLE: att_handle=16[0m
+
+[0;32mI (121203) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (121983) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (122083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (122083) NimBLE: att_handle=16[0m
+
+[0;32mI (123043) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (123083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (123083) NimBLE: att_handle=16[0m
+
+[0;32mI (124083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (124083) NimBLE: att_handle=16[0m
+
+[0;32mI (125083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (125083) NimBLE: att_handle=16[0m
+
+[0;32mI (126083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (126083) NimBLE: att_handle=16[0m
+
+[0;32mI (127083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (127083) NimBLE: att_handle=16[0m
+
+[0;32mI (128083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (128083) NimBLE: att_handle=16[0m
+
+[0;32mI (128703) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (129083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (129083) NimBLE: att_handle=16[0m
+
+[0;32mI (129593) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (130083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (130083) NimBLE: att_handle=16[0m
+
+[0;32mI (131083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (131083) NimBLE: att_handle=16[0m
+
+[0;32mI (132083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (132083) NimBLE: att_handle=16[0m
+
+[0;32mI (133083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (133083) NimBLE: att_handle=16[0m
+
+[0;32mI (134083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (134083) NimBLE: att_handle=16[0m
+
+[0;32mI (135083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (135083) NimBLE: att_handle=16[0m
+
+[0;32mI (135173) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (135853) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (136083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (136083) NimBLE: att_handle=16[0m
+
+[0;32mI (137083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (137083) NimBLE: att_handle=16[0m
+
+[0;32mI (138083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (138083) NimBLE: att_handle=16[0m
+
+[0;32mI (139083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (139083) NimBLE: att_handle=16[0m
+
+[0;32mI (140083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (140083) NimBLE: att_handle=16[0m
+
+[0;32mI (141083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (141083) NimBLE: att_handle=16[0m
+
+[0;32mI (141523) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (142083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (142083) NimBLE: att_handle=16[0m
+
+[0;32mI (142313) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (143083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (143083) NimBLE: att_handle=16[0m
+
+[0;32mI (144083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (144083) NimBLE: att_handle=16[0m
+
+[0;32mI (145083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (145083) NimBLE: att_handle=16[0m
+
+[0;32mI (146083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (146083) NimBLE: att_handle=16[0m
+
+[0;32mI (147083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (147083) NimBLE: att_handle=16[0m
+
+[0;32mI (148053) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (148083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (148083) NimBLE: att_handle=16[0m
+
+[0;32mI (148853) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (149083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (149083) NimBLE: att_handle=16[0m
+
+[0;32mI (150083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (150083) NimBLE: att_handle=16[0m
+
+[0;32mI (151083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (151083) NimBLE: att_handle=16[0m
+
+[0;32mI (152083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (152083) NimBLE: att_handle=16[0m
+
+[0;32mI (153083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (153083) NimBLE: att_handle=16[0m
+
+[0;32mI (154083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (154083) NimBLE: att_handle=16[0m
+
+[0;32mI (154603) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (155083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (155083) NimBLE: att_handle=16[0m
+
+[0;32mI (155503) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (156083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (156083) NimBLE: att_handle=16[0m
+
+[0;32mI (157083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (157083) NimBLE: att_handle=16[0m
+
+[0;32mI (158083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (158083) NimBLE: att_handle=16[0m
+
+[0;32mI (159083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (159083) NimBLE: att_handle=16[0m
+
+[0;32mI (160083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (160083) NimBLE: att_handle=16[0m
+
+[0;32mI (161083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (161083) NimBLE: att_handle=16[0m
+
+[0;32mI (161193) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (162083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (162083) NimBLE: att_handle=16[0m
+
+[0;32mI (162163) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (163083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (163083) NimBLE: att_handle=16[0m
+
+[0;32mI (164083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (164083) NimBLE: att_handle=16[0m
+
+[0;32mI (165083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (165083) NimBLE: att_handle=16[0m
+
+[0;32mI (166083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (166083) NimBLE: att_handle=16[0m
+
+[0;32mI (167083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (167083) NimBLE: att_handle=16[0m
+
+[0;32mI (167953) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (168083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (168083) NimBLE: att_handle=16[0m
+
+[0;32mI (168743) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (169083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (169083) NimBLE: att_handle=16[0m
+
+[0;32mI (170083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (170083) NimBLE: att_handle=16[0m
+
+[0;32mI (171083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (171083) NimBLE: att_handle=16[0m
+
+[0;32mI (172083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (172083) NimBLE: att_handle=16[0m
+
+[0;32mI (173083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (173083) NimBLE: att_handle=16[0m
+
+[0;32mI (174083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (174083) NimBLE: att_handle=16[0m
+
+[0;32mI (174473) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (175083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (175083) NimBLE: att_handle=16[0m
+
+[0;32mI (175283) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (176083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (176083) NimBLE: att_handle=16[0m
+
+[0;32mI (177083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (177083) NimBLE: att_handle=16[0m
+
+[0;32mI (178083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (178083) NimBLE: att_handle=16[0m
+
+[0;32mI (179083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (179083) NimBLE: att_handle=16[0m
+
+[0;32mI (180083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (180083) NimBLE: att_handle=16[0m
+
+[0;32mI (180463) SMART_HELMET_IOT: health uptime=180023 heap=153540 min_heap=103780 stack=1964[0m
+[0;32mI (180963) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (181083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (181083) NimBLE: att_handle=16[0m
+
+[0;32mI (181943) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (182083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (182083) NimBLE: att_handle=16[0m
+
+[0;32mI (183083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (183083) NimBLE: att_handle=16[0m
+
+[0;32mI (184083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (184083) NimBLE: att_handle=16[0m
+
+[0;32mI (185083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (185083) NimBLE: att_handle=16[0m
+
+[0;32mI (186083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (186083) NimBLE: att_handle=16[0m
+
+[0;32mI (187083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (187083) NimBLE: att_handle=16[0m
+
+[0;32mI (187793) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (188083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (188083) NimBLE: att_handle=16[0m
+
+[0;32mI (188683) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (189083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (189083) NimBLE: att_handle=16[0m
+
+[0;32mI (190083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (190083) NimBLE: att_handle=16[0m
+
+[0;32mI (191083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (191083) NimBLE: att_handle=16[0m
+
+[0;32mI (192083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (192083) NimBLE: att_handle=16[0m
+
+[0;32mI (193083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (193083) NimBLE: att_handle=16[0m
+
+[0;32mI (194083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (194083) NimBLE: att_handle=16[0m
+
+[0;32mI (194373) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (195083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (195083) NimBLE: att_handle=16[0m
+
+[0;32mI (195333) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (196083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (196083) NimBLE: att_handle=16[0m
+
+[0;32mI (197083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (197083) NimBLE: att_handle=16[0m
+
+[0;32mI (198083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (198083) NimBLE: att_handle=16[0m
+
+[0;32mI (199083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (199083) NimBLE: att_handle=16[0m
+
+[0;32mI (200083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (200083) NimBLE: att_handle=16[0m
+
+[0;32mI (201083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (201083) NimBLE: att_handle=16[0m
+
+[0;32mI (201123) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (202083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (202083) NimBLE: att_handle=16[0m
+
+[0;32mI (202303) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (203083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (203083) NimBLE: att_handle=16[0m
+
+[0;32mI (204083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (204083) NimBLE: att_handle=16[0m
+
+[0;32mI (205083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (205083) NimBLE: att_handle=16[0m
+
+[0;32mI (206083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (206083) NimBLE: att_handle=16[0m
+
+[0;32mI (207083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (207083) NimBLE: att_handle=16[0m
+
+[0;32mI (208063) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (208083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (208083) NimBLE: att_handle=16[0m
+
+[0;32mI (208973) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (209083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (209083) NimBLE: att_handle=16[0m
+
+[0;32mI (210083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (210083) NimBLE: att_handle=16[0m
+
+[0;32mI (211083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (211083) NimBLE: att_handle=16[0m
+
+[0;32mI (212083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (212083) NimBLE: att_handle=16[0m
+
+[0;32mI (213083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (213083) NimBLE: att_handle=16[0m
+
+[0;32mI (214083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (214083) NimBLE: att_handle=16[0m
+
+[0;32mI (214823) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (215083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (215083) NimBLE: att_handle=16[0m
+
+[0;32mI (215823) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (216083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (216083) NimBLE: att_handle=16[0m
+
+[0;32mI (217083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (217083) NimBLE: att_handle=16[0m
+
+[0;32mI (218083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (218083) NimBLE: att_handle=16[0m
+
+[0;32mI (219083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (219083) NimBLE: att_handle=16[0m
+
+[0;32mI (220083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (220083) NimBLE: att_handle=16[0m
+
+[0;32mI (221083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (221083) NimBLE: att_handle=16[0m
+
+[0;32mI (221723) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (222083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (222083) NimBLE: att_handle=16[0m
+
+[0;32mI (222603) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (223083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (223083) NimBLE: att_handle=16[0m
+
+[0;32mI (224083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (224083) NimBLE: att_handle=16[0m
+
+[0;32mI (225083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (225083) NimBLE: att_handle=16[0m
+
+[0;32mI (226083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (226083) NimBLE: att_handle=16[0m
+
+[0;32mI (227083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (227083) NimBLE: att_handle=16[0m
+
+[0;32mI (228083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (228083) NimBLE: att_handle=16[0m
+
+[0;32mI (228333) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (229083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (229083) NimBLE: att_handle=16[0m
+
+[0;32mI (229233) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (230083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (230083) NimBLE: att_handle=16[0m
+
+[0;32mI (231083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (231083) NimBLE: att_handle=16[0m
+
+[0;32mI (232083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (232083) NimBLE: att_handle=16[0m
+
+[0;32mI (233083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (233083) NimBLE: att_handle=16[0m
+
+[0;32mI (234083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (234083) NimBLE: att_handle=16[0m
+
+[0;32mI (234993) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (235083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (235083) NimBLE: att_handle=16[0m
+
+[0;32mI (236023) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (236083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (236083) NimBLE: att_handle=16[0m
+
+[0;32mI (237083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (237083) NimBLE: att_handle=16[0m
+
+[0;32mI (238083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (238083) NimBLE: att_handle=16[0m
+
+[0;32mI (239083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (239083) NimBLE: att_handle=16[0m
+
+[0;32mI (240083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (240083) NimBLE: att_handle=16[0m
+
+[0;32mI (240463) SMART_HELMET_IOT: health uptime=240023 heap=153540 min_heap=103780 stack=1964[0m
+[0;32mI (241083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (241083) NimBLE: att_handle=16[0m
+
+[0;32mI (241683) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (242083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (242083) NimBLE: att_handle=16[0m
+
+[0;32mI (242753) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (243083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (243083) NimBLE: att_handle=16[0m
+
+[0;32mI (244083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (244083) NimBLE: att_handle=16[0m
+
+[0;32mI (245083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (245083) NimBLE: att_handle=16[0m
+
+[0;32mI (246083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (246083) NimBLE: att_handle=16[0m
+
+[0;32mI (247083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (247083) NimBLE: att_handle=16[0m
+
+[0;32mI (248083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (248083) NimBLE: att_handle=16[0m
+
+[0;32mI (248503) esp-x509-crt-bundle: Certificate validated[0m
+[0;32mI (249083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (249083) NimBLE: att_handle=16[0m
+
+[0;32mI (249313) cloud_client: Cloud write delivered, status=204[0m
+[0;32mI (250083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (250083) NimBLE: att_handle=16[0m
+
+[0;32mI (251083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (251083) NimBLE: att_handle=16[0m
+
+[0;32mI (252083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (252083) NimBLE: att_handle=16[0m
+
+[0;32mI (253083) NimBLE: GATT procedure initiated: notify; [0m
+[0;32mI (253083) NimBLE: att_handle=16[0m
+

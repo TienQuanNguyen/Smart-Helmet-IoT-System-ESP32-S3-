@@ -7,6 +7,7 @@
 #include "esp_event.h"
 #include "esp_log.h"
 #include "esp_netif.h"
+#include "esp_netif_sntp.h"
 #include "esp_timer.h"
 #include "esp_wifi.h"
 #include "event_manager.h"
@@ -98,6 +99,10 @@ static void wifi_manager_event_handler(void *arg, esp_event_base_t event_base,
       if (!event_manager_publish(SYSTEM_EVENT_WIFI_CONNECTED))
         ESP_LOGW(TAG, "Wi-Fi connected event queue full");
     }
+#if CONFIG_SMART_HELMET_CLOUD_FIREBASE
+    if (esp_netif_sntp_start() != ESP_OK)
+      ESP_LOGW(TAG, "SNTP start failed; Firebase waits for valid clock");
+#endif
     ESP_LOGI(TAG, "Wi-Fi connected");
   }
 }
@@ -187,6 +192,12 @@ bool wifi_manager_init(const wifi_manager_config_t *config) {
     return false;
   }
 
+#if CONFIG_SMART_HELMET_CLOUD_FIREBASE
+  esp_sntp_config_t time_config = ESP_NETIF_SNTP_DEFAULT_CONFIG("time.google.com");
+  time_config.start = false;
+  time_config.wait_for_sync = false;
+  if (esp_netif_sntp_init(&time_config) != ESP_OK) return false;
+#endif
   s_enabled = true;
   esp_timer_create_args_t timer = {.callback = reconnect_timer,
                                    .name = "wifi_retry"};

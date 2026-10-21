@@ -2,7 +2,7 @@ menu "Smart Helmet Phase 7 Communication"
 
     config SMART_HELMET_DEVICE_ID
         string "Device ID for cloud reports"
-        default "helmet-node"
+        default "Helmet_001"
 
     config SMART_HELMET_WIFI_ENABLE
         bool "Enable Wi-Fi station manager"
@@ -25,16 +25,31 @@ menu "Smart Helmet Phase 7 Communication"
         depends on SMART_HELMET_WIFI_ENABLE
 
     config SMART_HELMET_CLOUD_ENABLE
-        bool "Enable emergency HTTP cloud client"
+        bool "Enable cloud reports and Firebase telemetry"
         default n
 
+    config SMART_HELMET_CLOUD_FIREBASE
+        bool "Use Firebase Realtime Database REST API"
+        default n
+        depends on SMART_HELMET_CLOUD_ENABLE
+        help
+            PATCH Devices/<device>/telemetry and Events/<device>/<stable ID>.
+            Use a database secret, not a Firebase Web API key. Secret is stored
+            locally in sdkconfig and compiled firmware. Do not publish either.
+
+    config SMART_HELMET_CLOUD_TELEMETRY_INTERVAL_MS
+        int "Firebase telemetry interval (ms)"
+        default 5000
+        range 1000 60000
+        depends on SMART_HELMET_CLOUD_FIREBASE
+
     config SMART_HELMET_CLOUD_URL
-        string "Emergency HTTP/HTTPS endpoint URL"
+        string "HTTP endpoint or Firebase HTTPS database root"
         default ""
         depends on SMART_HELMET_CLOUD_ENABLE
 
     config SMART_HELMET_CLOUD_AUTH_TOKEN
-        string "Emergency endpoint bearer token"
+        string "Bearer token or Firebase legacy database secret"
         default ""
         depends on SMART_HELMET_CLOUD_ENABLE
 

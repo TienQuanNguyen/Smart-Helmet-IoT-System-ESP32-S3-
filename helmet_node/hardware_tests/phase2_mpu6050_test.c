@@ -34,6 +34,7 @@
 
 #define MPU6050_EXPECTED_WHO_AM_I 0x68
 #define MPU6050_PWR_WAKEUP 0x00
+#define MPU6050_PWR_RESET 0x80
 #define MPU6050_DLPF_CONFIG 0x03
 #define MPU6050_SAMPLE_RATE_DIV 0x07
 #define MPU6050_GYRO_CONFIG_250DPS 0x00
@@ -253,6 +254,14 @@ static bool phase2_configure_mpu(void) {
     return false;
   }
 
+  /* Reset stale sensor/interrupt state left by an ESP32-only reset. */
+  err = phase2_write_register(MPU6050_REG_PWR_MGMT_1, MPU6050_PWR_RESET);
+  if (err != ESP_OK) {
+    ESP_LOGE(TAG, "FAIL: internal reset: %s", esp_err_to_name(err));
+    return false;
+  }
+  vTaskDelay(pdMS_TO_TICKS(100));
+
   err = phase2_write_register(MPU6050_REG_PWR_MGMT_1, MPU6050_PWR_WAKEUP);
   if (err != ESP_OK) {
     ESP_LOGE(TAG, "FAIL: wake-up: %s", esp_err_to_name(err));
@@ -260,9 +269,9 @@ static bool phase2_configure_mpu(void) {
   }
   vTaskDelay(pdMS_TO_TICKS(100));
 
-  if ((phase2_write_register(MPU6050_REG_CONFIG, MPU6050_DLPF_CONFIG) !=
+  if ((phase2_write_register(MPU6050_REG_SMPLRT_DIV, MPU6050_SAMPLE_RATE_DIV) !=
        ESP_OK) ||
-      (phase2_write_register(MPU6050_REG_SMPLRT_DIV, MPU6050_SAMPLE_RATE_DIV) !=
+      (phase2_write_register(MPU6050_REG_CONFIG, MPU6050_DLPF_CONFIG) !=
        ESP_OK) ||
       (phase2_write_register(MPU6050_REG_GYRO_CONFIG,
                              MPU6050_GYRO_CONFIG_250DPS) != ESP_OK) ||
@@ -436,8 +445,11 @@ bool phase2_mpu6050_test_start(const hardware_test_config_t *config) {
     return false;
   }
 
+  uint8_t pending_interrupt = 0;
   if (!phase2_interrupt_init(config->mpu_int_pin) ||
       (phase2_write_register(MPU6050_REG_INT_PIN_CFG, MPU6050_INT_PIN_CONFIG) !=
+       ESP_OK) ||
+      (phase2_read_register(MPU6050_REG_INT_STATUS, &pending_interrupt) !=
        ESP_OK) ||
       (phase2_write_register(MPU6050_REG_INT_ENABLE,
                              MPU6050_DATA_READY_ENABLE) != ESP_OK)) {

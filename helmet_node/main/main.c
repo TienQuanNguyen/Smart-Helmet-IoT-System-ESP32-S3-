@@ -1,4 +1,5 @@
 #include <stdatomic.h>
+#include <string.h>
 
 #include "accident_detector.h"
 #include "app_test.h"
@@ -25,6 +26,9 @@
 
 static const char *TAG = SYSTEM_NAME;
 static atomic_bool s_startup_fault;
+static atomic_bool s_imu_valid, s_alcohol_valid, s_alcohol_detected;
+static _Atomic float s_accel_mag_g, s_alcohol_voltage;
+static atomic_uint s_alcohol_raw;
 
 static uint32_t uptime_ms(void) {
   return (uint32_t)(esp_timer_get_time() / 1000);
@@ -32,6 +36,7 @@ static uint32_t uptime_ms(void) {
 
 static void task_alcohol_check(void *arg) {
   (void)arg;
+  s_alcohol_valid = false;
   mq3_power_on();
   ESP_LOGI(TAG, "MQ-3 warm-up: %u ms (FSM remains responsive)",
            MQ3_WARMUP_TIME_MS);
@@ -53,6 +58,10 @@ static void task_alcohol_check(void *arg) {
   mq3_power_off();
   float average = voltage_sum / MQ3_SAMPLE_COUNT;
   bool pass = ok && !mq3_is_alcohol_detected(average);
+  s_alcohol_raw = raw_sum / MQ3_SAMPLE_COUNT;
+  s_alcohol_voltage = average;
+  s_alcohol_detected = ok && !pass;
+  s_alcohol_valid = ok;
   ESP_LOGI(TAG, "MQ-3 raw_avg=%lu voltage_avg=%.3fV result=%s sensor_ok=%d",
            (unsigned long)(raw_sum / MQ3_SAMPLE_COUNT), average,
            pass ? "PASS" : "FAIL", ok);
@@ -154,6 +163,8 @@ static void task_imu_monitor(void *arg) {
     if (read_accel_sample(timestamp_ms, &accel) &&
         accident_detector_update(accel.x, accel.y, accel.z, timestamp_ms,
                                  &result)) {
+      s_accel_mag_g = result.accel_magnitude_g;
+      s_imu_valid = true;
       if (result.impact_detected && !impact_event_sent) {
         ESP_LOGW(TAG, "IMU impact: %.2fg tilt=%.1fdeg",
                  result.accel_magnitude_g, result.tilt_angle_deg);
@@ -166,6 +177,7 @@ static void task_imu_monitor(void *arg) {
         fall_event_sent = event_manager_publish(SYSTEM_EVENT_FALL_CONFIRMED);
       }
     } else {
+      s_imu_valid = false;
       if (timestamp_ms % 5000 < IMU_SAMPLE_PERIOD_MS)
         ESP_LOGW(TAG, "Failed to update accident detector");
     }
@@ -207,6 +219,21 @@ static void task_system_manager(void *arg) {
         elapsed_ms - last_status_ms >= 1000) {
       if (!ble_comm_notify_state(current_state, elapsed_ms))
         ESP_LOGD(TAG, "BLE notify unavailable");
+      cloud_client_telemetry_t telemetry = {
+          .state = current_state, .uptime_ms = elapsed_ms,
+          .imu_valid = s_imu_valid, .accel_mag_g = s_accel_mag_g,
+          .alcohol_valid = s_alcohol_valid, .alcohol_raw = s_alcohol_raw,
+          .alcohol_voltage = s_alcohol_voltage,
+          .alcohol_detected = s_alcohol_detected,
+          .fall_detected = current_state == SYSTEM_STATE_ACCIDENT_DETECTED ||
+              (current_state == SYSTEM_STATE_EMERGENCY_REPORTING &&
+               (strcmp(emergency_source, "IMU_IMPACT") == 0 ||
+                strcmp(emergency_source, "FALL_CONFIRMED") == 0)),
+          .sos_latched = false};
+      /* Source is retained across event-loop ticks for an active emergency. */
+      telemetry.sos_latched = current_state == SYSTEM_STATE_EMERGENCY_REPORTING &&
+          strcmp(emergency_source, "SOS_PRESSED") == 0;
+      cloud_client_update_telemetry(&telemetry);
       last_status_ms = elapsed_ms;
     }
 
