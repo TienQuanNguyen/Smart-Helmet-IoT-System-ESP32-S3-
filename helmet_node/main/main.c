@@ -17,11 +17,15 @@
 #include "mpu6050_driver.h"
 #include "mq3_driver.h"
 #include "pin_config.h"
+#include "power_manager.h"
 #include "sdkconfig.h"
 #include "system_config.h"
 #include "system_state.h"
 #include "wifi_manager.h"
 
+#ifndef CONFIG_SMART_HELMET_POWER_TEST
+#define CONFIG_SMART_HELMET_POWER_TEST 0
+#endif
 #define SYSTEM_EVENT_WAIT_TIMEOUT_MS 20
 
 static const char *TAG = SYSTEM_NAME;
@@ -238,6 +242,7 @@ static void task_system_manager(void *arg) {
       telemetry.sos_latched =
           current_state == SYSTEM_STATE_EMERGENCY_REPORTING &&
           strcmp(emergency_source, "SOS_PRESSED") == 0;
+      power_manager_get_snapshot(&telemetry.power);
       cloud_client_update_telemetry(&telemetry);
       last_status_ms = elapsed_ms;
     }
@@ -289,9 +294,9 @@ void app_main(void) {
   ESP_LOGI(TAG, "Booting %s", SYSTEM_NAME);
   ESP_LOGI(TAG, "Target board: ESP32-S3 DevKit");
 
-  if (HARDWARE_TEST_MODE != 0) {
+  if (CONFIG_SMART_HELMET_POWER_TEST || HARDWARE_TEST_MODE != 0) {
     const hardware_test_config_t test_config = {
-        .phase = HARDWARE_TEST_PHASE,
+        .phase = CONFIG_SMART_HELMET_POWER_TEST ? 12 : HARDWARE_TEST_PHASE,
         .i2c_sda_pin = PIN_I2C_SDA,
         .i2c_scl_pin = PIN_I2C_SCL,
         .mpu_int_pin = PIN_MPU6050_INT,
@@ -321,6 +326,13 @@ void app_main(void) {
     ESP_LOGE(TAG, "System init failed");
     return;
   }
+
+  power_config_t power = power_manager_default_config();
+#if CONFIG_SMART_HELMET_POWER_MOCK
+  power.source = POWER_MOCK;
+#endif
+  if (!power_manager_init(&power) || !power_manager_start())
+    ESP_LOGE(TAG, "Power monitor unavailable; safety monitoring continues");
 
   bool wifi_ok = wifi_manager_init(NULL);
   bool ble_ok = ble_comm_init();

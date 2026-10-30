@@ -1,5 +1,9 @@
 # Phase 1-6 Verification Plan
 
+> 2026-10-30: [Phase 12 Power Manager](phase_power_manager.md) adds Mock/backend architecture,
+> safe battery advisory events, Firebase power telemetry and isolated tests.
+> Real battery hardware and power savings remain BLOCKED.
+
 Status date: 2026-10-02
 
 ## 1. Evidence policy

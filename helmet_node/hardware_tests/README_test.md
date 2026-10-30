@@ -1,5 +1,9 @@
 # DANH SÁCH KIỂM TRA PHẦN CỨNG GIAI ĐOẠN 1–6
 
+> 2026-10-30: [Phase 12 Power Manager](../docs/phase_power_manager.md) adds Mock/backend architecture,
+> safe battery advisory events, Firebase power telemetry and isolated tests.
+> Real battery hardware and power savings remain BLOCKED.
+
 Luồng ứng dụng tích hợp và checklist Phase 8–11 được ghi riêng tại
 [báo cáo Phase 8–11](../docs/phase_8_to_11_validation.md). Không dùng kết quả
 host mock hoặc build của luồng này để thay thế kết quả phần cứng Phase 1–6.

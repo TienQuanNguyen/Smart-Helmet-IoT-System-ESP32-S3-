@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "system_state.h"
+#include "power_manager.h"
 
 typedef struct {
     const char *source_event;
@@ -25,5 +26,6 @@ typedef struct {
     float accel_mag_g, alcohol_voltage;
     uint16_t alcohol_raw;
     bool alcohol_detected;
+    power_snapshot_t power;
 } cloud_client_telemetry_t;
 bool cloud_client_update_telemetry(const cloud_client_telemetry_t *sample);

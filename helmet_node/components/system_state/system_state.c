@@ -6,11 +6,6 @@ static const char *TAG = "system_state";
 
 static system_state_t s_state = SYSTEM_STATE_BOOT;
 
-static bool system_state_is_emergency(system_state_t state) {
-  return (state == SYSTEM_STATE_ACCIDENT_DETECTED) ||
-         (state == SYSTEM_STATE_EMERGENCY_REPORTING);
-}
-
 bool system_state_init(void) {
   s_state = SYSTEM_STATE_BOOT;
   ESP_LOGI(TAG, "Initial state: %s", system_state_to_string(s_state));
@@ -38,10 +33,12 @@ void system_state_handle_event(system_event_t event) {
     return;
   }
 
-  if ((event == SYSTEM_EVENT_BATTERY_LOW) &&
-      !system_state_is_emergency(s_state)) {
-    system_state_set(SYSTEM_STATE_LOW_POWER_IDLE);
-    return;
+  /* Battery warnings are orthogonal to ride authorization and safety.
+   * Let the current FSM progress; never park accident monitoring on low SOC. */
+  if (event == SYSTEM_EVENT_BATTERY_LOW ||
+      event == SYSTEM_EVENT_BATTERY_CRITICAL ||
+      event == SYSTEM_EVENT_BATTERY_RECOVERED) {
+    ESP_LOGW(TAG, "Battery advisory: %s", system_event_to_string(event));
   }
 
   switch (s_state) {
@@ -122,6 +119,10 @@ const char *system_event_to_string(system_event_t event) {
       return "SOS_PRESSED";
     case SYSTEM_EVENT_BATTERY_LOW:
       return "BATTERY_LOW";
+    case SYSTEM_EVENT_BATTERY_CRITICAL:
+      return "BATTERY_CRITICAL";
+    case SYSTEM_EVENT_BATTERY_RECOVERED:
+      return "BATTERY_RECOVERED";
     default:
       return "UNKNOWN_EVENT";
   }

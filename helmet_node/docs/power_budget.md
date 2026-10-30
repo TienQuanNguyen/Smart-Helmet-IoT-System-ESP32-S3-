@@ -1,7 +1,7 @@
 # Power Budget and Validation Status
 
-Status: BLOCKED - no current measured current-consumption dataset is stored in
-this repository.
+Status: Power Manager IMPLEMENTED / host MOCK VERIFIED; measured current-consumption
+and real battery sensing remain BLOCKED. See [Phase 12](phase_power_manager.md).
 
 This document intentionally contains no estimated PASS values. Power claims
 must be based on measurements from the assembled hardware.
@@ -20,10 +20,12 @@ not directly power the MQ-3 heater.
 | Function | Status | Evidence |
 |---|---|---|
 | MQ-3 power-enable and calibrated ADC API | IMPLEMENTED | GPIO control, GPIO4 mapping validation and ADC curve-fitting conversion exist in the driver |
-| MQ-3 application power schedule | BLOCKED | Normal startup alcohol flow is absent |
+| MQ-3 application power schedule | IMPLEMENTED | Existing normal task warms, samples then turns heater off |
 | Wi-Fi on-demand policy | SOURCE PRESENT / RUNTIME BLOCKED | `wifi_manager` exists for the phone-hotspot gateway, but credentials and board logs are absent |
-| BLE power policy | CONTRACT PRESENT / RUNTIME BLOCKED | `ble_comm` Helmet/Bike GATT contract exists, but NimBLE runtime and Bike Node are absent |
-| GPS scheduling policy | BLOCKED | No normal periodic GPS task exists |
+| BLE power policy | PRESERVED | Existing NimBLE/Bike protocol and cadence unchanged by Power Manager |
+| GPS scheduling policy | PRESERVED | Existing GPS service cadence unchanged |
+| Power monitor and estimates | IMPLEMENTED / MOCK VERIFIED | Disabled by default; explicit Mock; real adapter/calibration not configured |
+| Low-battery cloud cadence | IMPLEMENTED / MOCK VERIFIED | Routine telemetry interval x3 for valid external LOW/CRITICAL; no emergency delay policy |
 | ESP-IDF dynamic power management | BLOCKED | `CONFIG_PM_ENABLE` is disabled |
 | Light-sleep validation | BLOCKED | No approved sleep-state/wakeup test exists |
 | Deep Sleep while driving | FAILED DESIGN CRITERION | It can miss accident and SOS events and must not be used |

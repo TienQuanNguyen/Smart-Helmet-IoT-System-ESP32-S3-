@@ -13,7 +13,7 @@
 
 #define IMU_SAMPLE_PERIOD_MS 20
 #define GPS_SAMPLE_PERIOD_MS 1000
-#define POWER_TASK_PERIOD_MS 1000
+/* Power cadence is owned by power_manager_default_config(). */
 
 #define PHASE2_DRIVER_LOG_PERIOD_MS 1000
 #define GPS_READ_TIMEOUT_MS 200

@@ -7,6 +7,7 @@ idf_component_register(
         "phase4_mq3_test.c"
         "phase5_accident_test.c"
         "phase6_fsm_test.c"
+        "phase12_power_test.c"
         "i2c_oled_test.c"
     INCLUDE_DIRS "include"
     PRIV_INCLUDE_DIRS "private_include"
@@ -25,4 +26,5 @@ idf_component_register(
         accident_detector
         event_manager
         system_state
+        power_manager
 )

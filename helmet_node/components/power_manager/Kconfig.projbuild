@@ -1,0 +1,12 @@
+menu "Smart Helmet Power Manager"
+    config SMART_HELMET_POWER_MOCK
+        bool "Enable synthetic battery samples (never real battery data)"
+        default n
+        help
+            Independent of sensor mock mode. No hardware pins are used.
+            Default fixture has no verified SOC/capacity: percentage and runtime
+            remain unavailable. Real sensing requires a configured board adapter.
+    config SMART_HELMET_POWER_TEST
+        bool "Run isolated Phase 12 power test instead of normal firmware"
+        default n
+endmenu

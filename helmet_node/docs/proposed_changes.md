@@ -2,7 +2,7 @@
 
 Date: 2026-10-02
 
-Status: CHANGE-001, CHANGE-002 AND CHANGE-013 APPROVED AND IMPLEMENTED; ALL OTHER CHANGE IDS WAITING FOR USER APPROVAL
+Status: CHANGE-001, CHANGE-002, CHANGE-012 AND CHANGE-013 APPROVED AND IMPLEMENTED; ALL OTHER CHANGE IDS WAITING FOR USER APPROVAL
 
 Framework: ESP-IDF v5.x  
 Primary language: C  
@@ -657,6 +657,20 @@ is approved
 ---
 
 ### CHANGE-012 - Introduce a state-aware power policy
+
+**Approval:** APPROVED in scope by user on 2026-10-30: "Hãy triển khai Power Manager với Mock Mode và kiến trúc hỗ trợ đo pin thật bằng ADC/cầu chia áp hoặc cảm biến ngoài ... Tích hợp API truyền dữ liệu lên app điện thoại." This explicit implementation instruction approves this phase; it does not approve GPIO/BLE/sleep/BMS changes.
+
+**Current implementation:** power_manager component, default disabled/explicit Mock,
+verified-data-only SOC/runtime model, callback adapter contract plus calibrated ADC
+divider helper, battery advisory events preserving safety FSM, existing Firebase
+telemetry extension, bounded telemetry cadence policy, Phase 12 and host tests.
+No physical ADC/I2C backend is selected while topology/sense hardware is unverified.
+No GPIO, BLE protocol, SDK configuration or sleep mode changes.
+
+**Evidence and scope details:** [Phase 12 Power Manager](phase_power_manager.md).
+Normal and Phase 12 ESP-IDF v5.5.4 builds and host tests pass; hardware battery measurement, consumption and phone end-to-end
+remain BLOCKED. The historical proposal below is retained for context, not a claim
+that every proposed sleep/radio/GPS policy was implemented.
 
 **Current**
 

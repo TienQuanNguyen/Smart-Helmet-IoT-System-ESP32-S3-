@@ -26,10 +26,12 @@ bool hardware_test_start(const hardware_test_config_t *config) {
       return phase5_accident_test_start(config);
     case 6:
       return phase6_fsm_test_start();
+    case 12:
+      return phase12_power_test_start();
     case 20:
       return i2c_oled_test_start(config);
     default:
-      ESP_LOGE(TAG, "Unsupported test: %d (expected 1..6 or 20)",
+      ESP_LOGE(TAG, "Unsupported test: %d (expected 1..6, 12 or 20)",
                config->phase);
       return false;
   }

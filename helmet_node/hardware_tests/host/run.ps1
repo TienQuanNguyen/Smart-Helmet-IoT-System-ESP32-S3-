@@ -16,7 +16,8 @@ try {
         "$repoRoot/bike_node/components/bike_state/include",
         "$repoRoot/helmet_node/components/system_state/include",
         "$repoRoot/helmet_node/components/event_manager/include",
-        "$repoRoot/helmet_node/components/helmet_io/include"
+        "$repoRoot/helmet_node/components/helmet_io/include",
+        "$repoRoot/helmet_node/components/power_manager/include"
     )
     $sources = @(
         "$PSScriptRoot/test_safety.c",
@@ -45,18 +46,33 @@ try {
     $cloudFlags = $flags + @('-DHOST_CLOUD_TEST=1', "-I$jsonRoot",
         "-I$repoRoot/helmet_node/components/cloud_client/include",
         "-I$repoRoot/helmet_node/components/wifi_manager/include")
-    & $hostCompiler @cloudFlags "$PSScriptRoot/test_cloud.c" "$jsonRoot/cJSON.c" `
+    & $hostCompiler @cloudFlags "$PSScriptRoot/test_cloud.c" "$jsonRoot/cJSON.c" "$repoRoot/helmet_node/components/power_manager/power_model.c" "$repoRoot/helmet_node/components/power_manager/power_json.c" `
         "$repoRoot/helmet_node/components/system_state/system_state.c" -o $cloudOutput
     if ($LASTEXITCODE -ne 0) { throw "Cloud host compilation failed (exit=$LASTEXITCODE; compiler=$hostCompiler). See compiler diagnostics above." }
     & $cloudOutput
     if ($LASTEXITCODE -ne 0) { throw 'Cloud host tests failed' }
 
     $firebaseOutput = Join-Path $env:TEMP 'smart_helmet_firebase_tests.exe'
-    & $hostCompiler @cloudFlags '-DHOST_FIREBASE_TEST=1' "$PSScriptRoot/test_cloud.c" "$jsonRoot/cJSON.c" `
+    & $hostCompiler @cloudFlags '-DHOST_FIREBASE_TEST=1' "$PSScriptRoot/test_cloud.c" "$jsonRoot/cJSON.c" "$repoRoot/helmet_node/components/power_manager/power_model.c" "$repoRoot/helmet_node/components/power_manager/power_json.c" `
         "$repoRoot/helmet_node/components/system_state/system_state.c" -o $firebaseOutput
     if ($LASTEXITCODE -ne 0) { throw "Firebase host compilation failed (exit=$LASTEXITCODE; compiler=$hostCompiler). See compiler diagnostics above." }
     & $firebaseOutput
     if ($LASTEXITCODE -ne 0) { throw 'Firebase host tests failed' }
+    $powerOutput = Join-Path $env:TEMP 'smart_helmet_power_tests.exe'
+    & $hostCompiler @flags "-I$jsonRoot" "$PSScriptRoot/test_power.c" `
+        "$repoRoot/helmet_node/components/power_manager/power_model.c" `
+        "$repoRoot/helmet_node/components/power_manager/power_json.c" `
+        "$repoRoot/helmet_node/components/system_state/system_state.c" `
+        "$jsonRoot/cJSON.c" -o $powerOutput
+    if ($LASTEXITCODE -ne 0) { throw 'Power host compilation failed' }
+    & $powerOutput
+    if ($LASTEXITCODE -ne 0) { throw 'Power host tests failed' }
+    $taskOutput = Join-Path $env:TEMP 'smart_helmet_power_task_tests.exe'
+    & $hostCompiler @flags '-DHOST_CLOUD_TEST=1' '-DHOST_FIREBASE_TEST=1' "$PSScriptRoot/test_power_task.c" `
+        "$repoRoot/helmet_node/components/power_manager/power_model.c" -o $taskOutput
+    if ($LASTEXITCODE -ne 0) { throw 'Power task host compilation failed' }
+    & $taskOutput
+    if ($LASTEXITCODE -ne 0) { throw 'Power task host tests failed' }
 } finally {
     # Also restore when the script is invoked directly/dot-sourced or throws.
     $env:PATH = $originalHostTestPath

@@ -250,6 +250,50 @@ int main(void) {
   CHECK(cJSON_IsNull(cJSON_GetObjectItem(json, "accel_mag_g")));
   CHECK(cJSON_IsNull(cJSON_GetObjectItem(json, "alcohol_detected")));
   cJSON_Delete(json);
+  /* Power API: missing values, mock provenance, expiry and finite serialization. */
+  sample.power = (power_snapshot_t){.source=POWER_MOCK,.status=POWER_OK,
+      .timestamp_ms=(uint32_t)(clock_us/1000),.valid_for_ms=15000,
+      .voltage_valid=true,.voltage_v=3.75f};
+  CHECK(cloud_client_update_telemetry(&sample));
+  CHECK(build_telemetry(payload,sizeof(payload)));
+  json=cJSON_Parse(payload);
+  cJSON *power=cJSON_GetObjectItem(json,"power");
+  CHECK(cJSON_IsTrue(cJSON_GetObjectItem(power,"mock")));
+  CHECK(cJSON_IsNull(cJSON_GetObjectItem(power,"soc_pct")));
+  CHECK(cJSON_IsNull(cJSON_GetObjectItem(power,"remaining_minutes")));
+  CHECK(cJSON_IsFalse(cJSON_GetObjectItem(power,"soc_valid")));
+  cJSON_Delete(json);
+  CHECK(!build_telemetry(payload,32));
+  sample.power.source=POWER_EXTERNAL;
+  sample.power.soc_valid=true; sample.power.soc_pct=9;
+  sample.power.runtime_valid=true; sample.power.remaining_minutes=45;
+  sample.power.level=POWER_CRITICAL;
+  CHECK(cloud_client_update_telemetry(&sample));
+  CHECK(build_telemetry(payload,sizeof(payload)));
+  json=cJSON_Parse(payload); power=cJSON_GetObjectItem(json,"power");
+  CHECK(cJSON_GetObjectItem(power,"soc_pct")->valuedouble==9);
+  CHECK(cJSON_GetObjectItem(power,"remaining_minutes")->valueint==45);
+  cJSON_Delete(json);
+  clock_us+=16000000;
+  CHECK(build_telemetry(payload,sizeof(payload)));
+  json=cJSON_Parse(payload); power=cJSON_GetObjectItem(json,"power");
+  CHECK(cJSON_IsNull(cJSON_GetObjectItem(power,"soc_pct")));
+  CHECK(cJSON_IsFalse(cJSON_GetObjectItem(power,"soc_valid")));
+  cJSON_Delete(json);
+  sample.power.timestamp_ms=(uint32_t)(clock_us/1000);
+  CHECK(cloud_client_update_telemetry(&sample));
+  wifi_up=true; s_next_telemetry_us=0;
+  service_telemetry();
+  CHECK(s_next_telemetry_us-clock_us==15000000); /* real low SOC: routine only */
+  sample.state=SYSTEM_STATE_EMERGENCY_REPORTING;
+  CHECK(cloud_client_update_telemetry(&sample));
+  s_next_telemetry_us=0; service_telemetry();
+  CHECK(s_next_telemetry_us-clock_us==5000000);
+  sample.state=SYSTEM_STATE_DRIVING_MONITORING; sample.power.source=POWER_MOCK;
+  CHECK(cloud_client_update_telemetry(&sample));
+  s_next_telemetry_us=0; service_telemetry();
+  CHECK(s_next_telemetry_us-clock_us==5000000); /* mock never changes policy */
+  telemetry_calls=0;
   s_next_telemetry_us = 0;
   service_telemetry();
   CHECK(telemetry_calls == 1);

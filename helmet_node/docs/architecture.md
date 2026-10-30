@@ -1,5 +1,9 @@
 # Current Firmware Architecture
 
+> 2026-10-30: [Phase 12 Power Manager](phase_power_manager.md) adds Mock/backend architecture,
+> safe battery advisory events, Firebase power telemetry and isolated tests.
+> Real battery hardware and power savings remain BLOCKED.
+
 > Historical Phase 1–7 snapshot. For the integrated Phase 8–11 sensor services,
 > IO, cloud outbox and real two-node BLE implementation, see
 > [the current validation report](phase_8_to_11_validation.md).
@@ -46,8 +50,8 @@ source is present in this repository.
 | Communication | `cloud_client` | Phase 7 queued HTTP emergency reporter for Helmet -> phone hotspot -> Cloud Server |
 | Communication | `ble_comm` | Phase 7 Helmet BLE GATT server contract for the ESP32-C3 Bike Node |
 
-The directory `components/power_manager` is still empty. It is not a built
-application feature.
+`components/power_manager` now builds with the application. Its current
+contract and evidence are documented in Phase 12 linked above.
 
 ## 3. Current execution paths
 

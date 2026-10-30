@@ -10,4 +10,5 @@ bool phase3_gps_test_start(const hardware_test_config_t *config);
 bool phase4_mq3_test_start(const hardware_test_config_t *config);
 bool phase5_accident_test_start(const hardware_test_config_t *config);
 bool phase6_fsm_test_start(void);
+bool phase12_power_test_start(void);
 bool i2c_oled_test_start(const hardware_test_config_t *config);

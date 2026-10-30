@@ -77,7 +77,7 @@ bool phase6_fsm_test_start(void) {
 
   system_state_init();
   CHECK(send_queued_event(SYSTEM_EVENT_BATTERY_LOW));
-  CHECK(expect_state(SYSTEM_STATE_LOW_POWER_IDLE, "battery low"));
+  CHECK(expect_state(SYSTEM_STATE_STARTUP_ALCOHOL_CHECK, "battery advisory preserves startup"));
 
 #undef CHECK
 

@@ -1,4 +1,5 @@
 #include "cloud_client.h"
+#include "power_json.h"
 
 #include <stdio.h>
 #include <math.h>
@@ -202,6 +203,7 @@ static bool build_telemetry(char *payload, size_t size) {
   bool present = s_telemetry_present;
   xSemaphoreGive(s_lock);
   if (!present) return false;
+  power_snapshot_expire(&sample.power, (uint32_t)(esp_timer_get_time()/1000), sample.power.valid_for_ms);
   gps_snapshot_t gps = {0};
   gps_get_snapshot(&gps);
   cJSON *root = cJSON_CreateObject();
@@ -232,6 +234,7 @@ static bool build_telemetry(char *payload, size_t size) {
          cJSON_AddNullToObject(root, "alcohol_voltage") &&
          cJSON_AddNullToObject(root, "alcohol_detected");
   }
+  if (ok) ok = power_json_add(root, &sample.power);
   if (ok) ok = cJSON_PrintPreallocated(root, payload, (int)size, false);
   cJSON_Delete(root);
   return ok;
@@ -241,11 +244,21 @@ static void service_telemetry(void) {
   if (!CONFIG_SMART_HELMET_CLOUD_FIREBASE || !wifi_manager_is_connected()) return;
   int64_t now = esp_timer_get_time();
   if (now < s_next_telemetry_us) return;
-  char payload[1024], path[128];
+  char payload[2048], path[128];
   snprintf(path, sizeof(path), "Devices/%s/telemetry", CONFIG_SMART_HELMET_DEVICE_ID);
   if (build_telemetry(payload, sizeof(payload))) send_payload(payload, path);
+  /* Only routine telemetry slows down. The emergency worker has its own
+   * schedule and BLE/IMU/SOS cadence is unchanged. Never act on mock SOC. */
+  xSemaphoreTake(s_lock, portMAX_DELAY);
+  power_snapshot_t power = s_telemetry.power;
+  system_state_t state = s_telemetry.state;
+  xSemaphoreGive(s_lock);
+  power_snapshot_expire(&power, (uint32_t)(esp_timer_get_time()/1000), power.valid_for_ms);
+  bool conserve = power.source == POWER_EXTERNAL && power.status == POWER_OK &&
+      power.soc_valid && (power.level == POWER_LOW || power.level == POWER_CRITICAL) &&
+      state != SYSTEM_STATE_ACCIDENT_DETECTED && state != SYSTEM_STATE_EMERGENCY_REPORTING;
   s_next_telemetry_us = esp_timer_get_time() +
-      (int64_t)CONFIG_SMART_HELMET_CLOUD_TELEMETRY_INTERVAL_MS * 1000;
+      (int64_t)CONFIG_SMART_HELMET_CLOUD_TELEMETRY_INTERVAL_MS * (conserve ? 3000 : 1000);
 }
 
 /* Backoff does not starve telemetry; no HTTP runs on the safety/FSM task. */
