@@ -67,7 +67,8 @@ static void task_alcohol_check(void *arg) {
            pass ? "PASS" : "FAIL", ok);
   system_event_t event =
       pass ? SYSTEM_EVENT_ALCOHOL_PASS : SYSTEM_EVENT_ALCOHOL_FAIL;
-  while (!event_manager_publish(event)) vTaskDelay(pdMS_TO_TICKS(100));
+  while (!event_manager_publish(event))
+    vTaskDelay(pdMS_TO_TICKS(100));
   vTaskDelete(NULL);
 }
 
@@ -75,26 +76,26 @@ static void update_io(system_state_t state, system_state_t previous,
                       system_event_t event, uint32_t now) {
   helmet_io_pattern_t pattern = HELMET_IO_ERROR;
   switch (state) {
-    case SYSTEM_STATE_BOOT:
-      pattern = HELMET_IO_BOOT;
-      break;
-    case SYSTEM_STATE_STARTUP_ALCOHOL_CHECK:
-      pattern = HELMET_IO_ALCOHOL_CHECK;
-      break;
-    case SYSTEM_STATE_READY_TO_RIDE:
-      pattern = HELMET_IO_READY;
-      break;
-    case SYSTEM_STATE_DRIVING_MONITORING:
-      pattern = HELMET_IO_DRIVING;
-      break;
-    case SYSTEM_STATE_ACCIDENT_DETECTED:
-      pattern = HELMET_IO_ACCIDENT;
-      break;
-    case SYSTEM_STATE_EMERGENCY_REPORTING:
-      pattern = HELMET_IO_EMERGENCY;
-      break;
-    default:
-      break;
+  case SYSTEM_STATE_BOOT:
+    pattern = HELMET_IO_BOOT;
+    break;
+  case SYSTEM_STATE_STARTUP_ALCOHOL_CHECK:
+    pattern = HELMET_IO_ALCOHOL_CHECK;
+    break;
+  case SYSTEM_STATE_READY_TO_RIDE:
+    pattern = HELMET_IO_READY;
+    break;
+  case SYSTEM_STATE_DRIVING_MONITORING:
+    pattern = HELMET_IO_DRIVING;
+    break;
+  case SYSTEM_STATE_ACCIDENT_DETECTED:
+    pattern = HELMET_IO_ACCIDENT;
+    break;
+  case SYSTEM_STATE_EMERGENCY_REPORTING:
+    pattern = HELMET_IO_EMERGENCY;
+    break;
+  default:
+    break;
   }
   helmet_io_set_pattern(pattern);
   if (s_startup_fault && state != SYSTEM_STATE_EMERGENCY_REPORTING)
@@ -220,18 +221,22 @@ static void task_system_manager(void *arg) {
       if (!ble_comm_notify_state(current_state, elapsed_ms))
         ESP_LOGD(TAG, "BLE notify unavailable");
       cloud_client_telemetry_t telemetry = {
-          .state = current_state, .uptime_ms = elapsed_ms,
-          .imu_valid = s_imu_valid, .accel_mag_g = s_accel_mag_g,
-          .alcohol_valid = s_alcohol_valid, .alcohol_raw = s_alcohol_raw,
+          .state = current_state,
+          .uptime_ms = elapsed_ms,
+          .imu_valid = s_imu_valid,
+          .accel_mag_g = s_accel_mag_g,
+          .alcohol_valid = s_alcohol_valid,
+          .alcohol_raw = s_alcohol_raw,
           .alcohol_voltage = s_alcohol_voltage,
           .alcohol_detected = s_alcohol_detected,
           .fall_detected = current_state == SYSTEM_STATE_ACCIDENT_DETECTED ||
-              (current_state == SYSTEM_STATE_EMERGENCY_REPORTING &&
-               (strcmp(emergency_source, "IMU_IMPACT") == 0 ||
-                strcmp(emergency_source, "FALL_CONFIRMED") == 0)),
+                           (current_state == SYSTEM_STATE_EMERGENCY_REPORTING &&
+                            (strcmp(emergency_source, "IMU_IMPACT") == 0 ||
+                             strcmp(emergency_source, "FALL_CONFIRMED") == 0)),
           .sos_latched = false};
       /* Source is retained across event-loop ticks for an active emergency. */
-      telemetry.sos_latched = current_state == SYSTEM_STATE_EMERGENCY_REPORTING &&
+      telemetry.sos_latched =
+          current_state == SYSTEM_STATE_EMERGENCY_REPORTING &&
           strcmp(emergency_source, "SOS_PRESSED") == 0;
       cloud_client_update_telemetry(&telemetry);
       last_status_ms = elapsed_ms;
@@ -328,14 +333,14 @@ void app_main(void) {
              "phone hotspot config is valid");
   }
 
-  const helmet_io_config_t io = {
-      .sos_pin = PIN_SOS_BUTTON,
-      .led_pin = PIN_LED_STATUS,
-      .buzzer_pin = PIN_BUZZER,
-      .sos_active = CONFIG_HELMET_SOS_ACTIVE_LEVEL,
-      .led_active = CONFIG_HELMET_LED_ACTIVE_LEVEL,
-      .buzzer_active = CONFIG_HELMET_BUZZER_ACTIVE_LEVEL,
-      .buzzer_hz = CONFIG_HELMET_BUZZER_HZ};
+  const helmet_io_config_t io = {.sos_pin = PIN_SOS_BUTTON,
+                                 .led_pin = PIN_LED_STATUS,
+                                 .buzzer_pin = PIN_BUZZER,
+                                 .sos_active = CONFIG_HELMET_SOS_ACTIVE_LEVEL,
+                                 .led_active = CONFIG_HELMET_LED_ACTIVE_LEVEL,
+                                 .buzzer_active =
+                                     CONFIG_HELMET_BUZZER_ACTIVE_LEVEL,
+                                 .buzzer_hz = CONFIG_HELMET_BUZZER_HZ};
   if (!helmet_io_init(&io)) {
     ESP_LOGE(TAG, "IO startup failed");
     return;
@@ -347,8 +352,10 @@ void app_main(void) {
   bool imu_ok = accident_detector_init() && init_mpu6050_driver();
   s_startup_fault = !mq3_ok || !imu_ok;
   /* Run startup reads only before their owning tasks exist. */
-  if (mq3_ok && imu_ok) app_test_run_startup_checks();
-  if (gps_ok && !gps_start_service()) ESP_LOGE(TAG, "GPS task startup failed");
+  if (mq3_ok && imu_ok)
+    app_test_run_startup_checks();
+  if (gps_ok && !gps_start_service())
+    ESP_LOGE(TAG, "GPS task startup failed");
   BaseType_t system_task_status =
       xTaskCreate(task_system_manager, "system_manager", 4096, NULL, 6, NULL);
   if (system_task_status != pdPASS) {
